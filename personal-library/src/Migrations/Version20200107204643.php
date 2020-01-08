@@ -1,5 +1,5 @@
 <?php
-
+// License proprietary
 declare(strict_types=1);
 
 namespace App\Migrations;
@@ -9,7 +9,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Class Version20200107204643
  */
 final class Version20200107204643 extends AbstractMigration
 {
@@ -23,6 +23,7 @@ final class Version20200107204643 extends AbstractMigration
 
     /**
      * @param Schema $schema
+     *
      * @throws DBALException
      */
     public function up(Schema $schema) : void
@@ -36,6 +37,7 @@ final class Version20200107204643 extends AbstractMigration
 
     /**
      * @param Schema $schema
+     *
      * @throws DBALException
      */
     public function down(Schema $schema) : void

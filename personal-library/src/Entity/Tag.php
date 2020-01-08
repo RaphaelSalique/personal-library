@@ -1,5 +1,5 @@
 <?php
-
+// License proprietary
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Tag
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag
@@ -48,22 +49,36 @@ class Tag
      */
     private $books;
 
+    /**
+     * Tag constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->books = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -71,11 +86,19 @@ class Tag
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
+    /**
+     * @param Tag|null $parent
+     *
+     * @return $this
+     */
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
@@ -91,6 +114,11 @@ class Tag
         return $this->tags;
     }
 
+    /**
+     * @param Tag $tag
+     *
+     * @return $this
+     */
     public function addTag(self $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -101,6 +129,11 @@ class Tag
         return $this;
     }
 
+    /**
+     * @param Tag $tag
+     *
+     * @return $this
+     */
     public function removeTag(self $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -122,6 +155,11 @@ class Tag
         return $this->books;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
@@ -132,6 +170,11 @@ class Tag
         return $this;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {

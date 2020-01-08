@@ -1,5 +1,5 @@
 <?php
-
+// License proprietary
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Editor
  * @ORM\Entity(repositoryClass="App\Repository\EditorRepository")
  */
 class Editor
@@ -34,21 +35,35 @@ class Editor
      */
     private $books;
 
+    /**
+     * Editor constructor.
+     */
     public function __construct()
     {
         $this->books = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -64,6 +79,11 @@ class Editor
         return $this->books;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
@@ -74,6 +94,11 @@ class Editor
         return $this;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {

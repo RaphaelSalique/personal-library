@@ -1,5 +1,5 @@
 <?php
-
+// License proprietary
 namespace App\Repository;
 
 use App\Entity\Author;
@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
+ * class AuthorRepository
  * @method Author|null find($id, $lockMode = null, $lockVersion = null)
  * @method Author|null findOneBy(array $criteria, array $orderBy = null)
  * @method Author[]    findAll()
@@ -14,6 +15,10 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class AuthorRepository extends ServiceEntityRepository
 {
+    /**
+     * AuthorRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Author::class);

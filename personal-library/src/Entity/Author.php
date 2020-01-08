@@ -1,5 +1,5 @@
 <?php
-
+// License proprietary
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Author
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
 class Author
@@ -41,21 +42,35 @@ class Author
      */
     private $books;
 
+    /**
+     * Author constructor.
+     */
     public function __construct()
     {
         $this->books = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -63,11 +78,19 @@ class Author
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
+    /**
+     * @param string $firstName
+     *
+     * @return $this
+     */
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
@@ -83,6 +106,11 @@ class Author
         return $this->books;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
@@ -93,6 +121,11 @@ class Author
         return $this;
     }
 
+    /**
+     * @param Book $book
+     *
+     * @return $this
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {

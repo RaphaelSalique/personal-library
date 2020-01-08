@@ -1,4 +1,5 @@
 <?php
+// License proprietary
 namespace App\Controller;
 
 use App\Repository\BookRepository;
@@ -8,13 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class BookController
- * @package App\Controller
  */
 class BookController extends AbstractController
 {
 
     /**
      * @Route("/")
+     *
+     * @param BookRepository $bookRepository
+     *
+     * @return Response
      */
     public function index(BookRepository $bookRepository): Response
     {

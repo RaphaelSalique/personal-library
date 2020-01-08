@@ -29,6 +29,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "escapestudios/symfony2-coding-standard": "3.x-dev",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.4",
         "phpstan/phpstan-doctrine": "^0.12.8",
@@ -68,15 +69,17 @@
     "scripts": {
         "ci": [
             "@phpstan",
+            "@phpcs",
             "@tests"
         ],
-        "tests": "phpunit",
+        "tests": "bin/phpunit",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
             "@php bin/console cache:warmup --env=test",
             "@phpstan-general",
             "@phpstan-tests"
         ],
+        "phpcs": "vendor/bin/phpcs --standard=Symfony src/",
         "phpstan-general": "phpstan analyse -c phpstan.neon src --level 7 --no-progress",
         "phpstan-tests": "phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress",
         "auto-scripts": {
