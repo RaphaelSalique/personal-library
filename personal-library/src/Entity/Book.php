@@ -89,6 +89,7 @@ class Book
     {
         $this->authors = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     /**
