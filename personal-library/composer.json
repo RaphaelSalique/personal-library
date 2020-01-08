@@ -36,6 +36,7 @@
         "phpstan/phpstan-doctrine": "^0.12.8",
         "phpstan/phpstan-phpunit": "^0.12.5",
         "phpstan/phpstan-symfony": "^0.12.2",
+        "sebastian/phpcpd": "^4.1",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
@@ -69,12 +70,14 @@
     },
     "scripts": {
         "ci": [
+            "@phpcpd",
             "@phpstan",
             "@phpcs",
             "@phpmd",
             "@tests"
         ],
         "tests": "bin/phpunit",
+        "phpcpd": "vendor/bin/phpcpd src/",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
             "@php bin/console cache:warmup --env=test",
