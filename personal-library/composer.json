@@ -30,6 +30,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "escapestudios/symfony2-coding-standard": "3.x-dev",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.4",
         "phpstan/phpstan-doctrine": "^0.12.8",
@@ -68,6 +69,7 @@
     },
     "scripts": {
         "ci": [
+            "@php-cs-fixer",
             "@phpstan",
             "@phpcs",
             "@tests"
@@ -80,6 +82,7 @@
             "@phpstan-tests"
         ],
         "phpcs": "vendor/bin/phpcs --standard=Symfony src/",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix src/",
         "phpstan-general": "phpstan analyse -c phpstan.neon src --level 7 --no-progress",
         "phpstan-tests": "phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress",
         "auto-scripts": {

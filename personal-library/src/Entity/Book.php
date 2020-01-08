@@ -1,5 +1,7 @@
 <?php
+
 // License proprietary
+
 namespace App\Entity;
 
 use DateTimeInterface;
@@ -8,7 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Book
+ * Class Book.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  */
 class Book
@@ -88,25 +91,17 @@ class Book
         $this->tags = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Editor|null
-     */
     public function getEditor(): ?Editor
     {
         return $this->editor;
     }
 
     /**
-     * @param Editor|null $editor
-     *
      * @return $this
      */
     public function setEditor(?Editor $editor): self
@@ -116,17 +111,12 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string $title
-     *
      * @return $this
      */
     public function setTitle(string $title): self
@@ -136,17 +126,12 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAbstract(): ?string
     {
         return $this->abstract;
     }
 
     /**
-     * @param string|null $abstract
-     *
      * @return $this
      */
     public function setAbstract(?string $abstract): self
@@ -156,17 +141,12 @@ class Book
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
-     *
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -176,17 +156,12 @@ class Book
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getPublishedAt(): ?DateTimeInterface
     {
         return $this->publishedAt;
     }
 
     /**
-     * @param DateTimeInterface $publishedAt
-     *
      * @return $this
      */
     public function setPublishedAt(DateTimeInterface $publishedAt): self
@@ -196,17 +171,12 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIsbn(): ?string
     {
         return $this->isbn;
     }
 
     /**
-     * @param string $isbn
-     *
      * @return $this
      */
     public function setIsbn(string $isbn): self
@@ -225,8 +195,6 @@ class Book
     }
 
     /**
-     * @param Author $author
-     *
      * @return $this
      */
     public function addAuthor(Author $author): self
@@ -239,8 +207,6 @@ class Book
     }
 
     /**
-     * @param Author $author
-     *
      * @return $this
      */
     public function removeAuthor(Author $author): self
@@ -261,8 +227,6 @@ class Book
     }
 
     /**
-     * @param Tag $tag
-     *
      * @return $this
      */
     public function addTag(Tag $tag): self
@@ -275,8 +239,6 @@ class Book
     }
 
     /**
-     * @param Tag $tag
-     *
      * @return $this
      */
     public function removeTag(Tag $tag): self

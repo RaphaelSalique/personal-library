@@ -1,5 +1,7 @@
 <?php
+
 // License proprietary
+
 namespace App\Controller;
 
 use App\Repository\BookRepository;
@@ -8,17 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class BookController
+ * Class BookController.
  */
 class BookController extends AbstractController
 {
-
     /**
      * @Route("/")
-     *
-     * @param BookRepository $bookRepository
-     *
-     * @return Response
      */
     public function index(BookRepository $bookRepository): Response
     {

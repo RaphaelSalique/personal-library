@@ -1,5 +1,7 @@
 <?php
+
 // License proprietary
+
 namespace App;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -11,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
- * Class Kernel
+ * Class Kernel.
  */
 class Kernel extends BaseKernel
 {
@@ -19,9 +21,6 @@ class Kernel extends BaseKernel
 
     private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
-    /**
-     * @return iterable
-     */
     public function registerBundles(): iterable
     {
         $contents = require $this->getProjectDir().'/config/bundles.php';
@@ -32,18 +31,12 @@ class Kernel extends BaseKernel
         }
     }
 
-    /**
-     * @return string
-     */
     public function getProjectDir(): string
     {
         return \dirname(__DIR__);
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
-     *
      * @throws \Exception
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
@@ -60,8 +53,6 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * @param RouteCollectionBuilder $routes
-     *
      * @throws LoaderLoadException
      */
     protected function configureRoutes(RouteCollectionBuilder $routes): void

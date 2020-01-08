@@ -1,5 +1,7 @@
 <?php
+
 // License proprietary
+
 namespace App\Repository;
 
 use App\Entity\Editor;
@@ -7,7 +9,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class EditorRepository
+ * Class EditorRepository.
+ *
  * @method Editor|null find($id, $lockMode = null, $lockVersion = null)
  * @method Editor|null findOneBy(array $criteria, array $orderBy = null)
  * @method Editor[]    findAll()
@@ -17,7 +20,6 @@ class EditorRepository extends ServiceEntityRepository
 {
     /**
      * EditorRepository constructor.
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
