@@ -8,7 +8,7 @@ services:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         MYSQL_USER: 'root'
       volumes:
-        - ./data/mysqlSf:/var/lib/mysql
+        - ./mysql:/var/lib/mysql
 
     maildev:
         image: djfarrelly/maildev
@@ -25,9 +25,9 @@ services:
           PMA_HOST: db
 
     php72:
-        build: php72
+        build: ./docker/php72
         ports:
             - "9172:80"
         volumes:
-            - ./vhosts:/etc/apache2/sites-enabled
-            - ./www:/var/www
+            - ./docker/vhosts:/etc/apache2/sites-enabled
+            - ./personal-library:/var/www/personal-library
