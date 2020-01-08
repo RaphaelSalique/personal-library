@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for book in books %}
+    <p>{{ book.title }}</p>
+{% else %}
+    <p>Pas de livre pour le moment</p>
+{% endfor %}
+{% endblock %}
