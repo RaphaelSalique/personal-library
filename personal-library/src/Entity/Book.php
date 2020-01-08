@@ -16,47 +16,65 @@ class Book
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Editor", inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @var Editor
      */
     private $editor;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @var string|null
      */
     private $abstract;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $isbn;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
+     *
+     * @var Collection<Book, Author>
      */
     private $authors;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="books")
+     *
+     * @var Collection<Book, Tag>
      */
     private $tags;
 
@@ -144,7 +162,7 @@ class Book
     }
 
     /**
-     * @return Collection|Author[]
+     * @return Collection<Book, Author>
      */
     public function getAuthors(): Collection
     {
@@ -170,7 +188,7 @@ class Book
     }
 
     /**
-     * @return Collection|Tag[]
+     * @return Collection<Book, Tag>
      */
     public function getTags(): Collection
     {

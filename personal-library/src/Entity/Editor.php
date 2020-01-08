@@ -15,16 +15,22 @@ class Editor
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="editor", orphanRemoval=true)
+     *
+     * @var Collection<Editor, Book>
      */
     private $books;
 
@@ -51,7 +57,7 @@ class Editor
     }
 
     /**
-     * @return Collection|Book[]
+     * @return Collection<Editor, Book>
      */
     public function getBooks(): Collection
     {

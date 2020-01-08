@@ -29,8 +29,15 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.4",
+        "phpstan/phpstan-doctrine": "^0.12.8",
+        "phpstan/phpstan-phpunit": "^0.12.5",
+        "phpstan/phpstan-symfony": "^0.12.2",
+        "squizlabs/php_codesniffer": "^3.5",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^5.0",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*"
     },
@@ -59,6 +66,19 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "ci": [
+            "@phpstan",
+            "@tests"
+        ],
+        "tests": "phpunit",
+        "phpstan": [
+            "@php bin/console cache:warmup --env=dev",
+            "@php bin/console cache:warmup --env=test",
+            "@phpstan-general",
+            "@phpstan-tests"
+        ],
+        "phpstan-general": "phpstan analyse -c phpstan.neon src --level 7 --no-progress",
+        "phpstan-tests": "phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

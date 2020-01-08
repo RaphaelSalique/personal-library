@@ -15,26 +15,36 @@ class Tag
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="tags")
+     *
+     * @var Tag|null
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tag", mappedBy="parent")
+     *
+     * @var Collection<Tag, Tag>
      */
     private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="tags")
+     *
+     * @var Collection<Tag, Book>
      */
     private $books;
 
@@ -74,7 +84,7 @@ class Tag
     }
 
     /**
-     * @return Collection|self[]
+     * @return Collection<Tag, Tag>
      */
     public function getTags(): Collection
     {
@@ -105,7 +115,7 @@ class Tag
     }
 
     /**
-     * @return Collection|Book[]
+     * @return Collection<Tag, Book>
      */
     public function getBooks(): Collection
     {

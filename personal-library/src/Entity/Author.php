@@ -15,21 +15,29 @@ class Author
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
     private $firstName;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="authors")
+     *
+     * @var Collection<Author, Book>
      */
     private $books;
 
@@ -68,7 +76,7 @@ class Author
     }
 
     /**
-     * @return Collection|Book[]
+     * @return Collection<Author, Book>
      */
     public function getBooks(): Collection
     {
