@@ -5,7 +5,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 RUN apt-get update \
     && apt-get install -y apt-utils \
-    && apt-get install -y --no-install-recommends locales git wget libicu-dev g++ zlib1g-dev \
+    && apt-get install -y --no-install-recommends locales git wget libicu-dev g++ zlib1g-dev unzip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install \
         intl \
