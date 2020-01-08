@@ -20,6 +20,7 @@ class EditorRepository extends ServiceEntityRepository
 {
     /**
      * EditorRepository constructor.
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {

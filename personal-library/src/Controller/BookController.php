@@ -16,6 +16,10 @@ class BookController extends AbstractController
 {
     /**
      * @Route("/")
+     *
+     * @param BookRepository $bookRepository
+     *
+     * @return Response
      */
     public function index(BookRepository $bookRepository): Response
     {

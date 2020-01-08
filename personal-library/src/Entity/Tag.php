@@ -61,17 +61,25 @@ class Tag
         $this->books = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
+     * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): self
@@ -82,7 +90,7 @@ class Tag
     }
 
     /**
-     * @return $this|null
+     * @return $this(Tag)|null
      */
     public function getParent(): ?self
     {
@@ -151,6 +159,8 @@ class Tag
     }
 
     /**
+     * @param Book $book
+     *
      * @return $this
      */
     public function addBook(Book $book): self
@@ -164,6 +174,8 @@ class Tag
     }
 
     /**
+     * @param Book $book
+     *
      * @return $this
      */
     public function removeBook(Book $book): self

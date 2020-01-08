@@ -14,12 +14,17 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200107204953 extends AbstractMigration
 {
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
         return '';
     }
 
     /**
+     * @param Schema $schema
+     *
      * @throws DBALException
      */
     public function up(Schema $schema): void
@@ -38,6 +43,8 @@ final class Version20200107204953 extends AbstractMigration
     }
 
     /**
+     * @param Schema $schema
+     *
      * @throws DBALException
      */
     public function down(Schema $schema): void
