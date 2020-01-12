@@ -4,7 +4,7 @@ parameters:
             no_check_all: true
         composer_normalize: ~
         composer_script:
-            script: @phpcbf
+            script: "@phpcbf"
         doctrine_orm: ~
         git_blacklist:
             keywords:
