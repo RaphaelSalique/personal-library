@@ -1,0 +1,6 @@
+App\Entity\Tag:
+    tag{1..50}:
+        name: '<word()>'
+    tag{51..60}:
+        name: '<word()>'
+        parent: '@tag<numberBetween(1, 50)>'

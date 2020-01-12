@@ -1,0 +1,4 @@
+App\Entity\Author:
+    author{1..50}:
+        name: '<lastName()>'
+        firstName: '<firstName()>'

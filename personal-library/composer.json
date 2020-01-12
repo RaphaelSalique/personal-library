@@ -32,7 +32,9 @@
         "escapestudios/symfony2-coding-standard": "3.x-dev",
         "friendsoftwig/twigcs": "^3.2",
         "jakub-onderka/php-parallel-lint": "^1.0",
+        "liip/test-fixtures-bundle": "^1.0.0",
         "localheinz/composer-normalize": "^2.2",
+        "nelmio/alice": "^3.5",
         "phpmd/phpmd": "^2.8",
         "phpro/grumphp": "^0.17.1",
         "phpstan/extension-installer": "^1.0",
@@ -47,7 +49,8 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*"
+        "symfony/test-pack": "*",
+        "theofidry/alice-data-fixtures": "^1.1"
     },
     "config": {
         "preferred-install": {

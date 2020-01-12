@@ -1,0 +1,10 @@
+App\Entity\Book:
+    book{1..100}:
+        editor: '@editor<numberBetween(1, 30)>'
+        title: '<sentence(5)>'
+        abstract: '<paragraph(3)>'
+        createdAt: "<dateTimeThisCentury('1999-12-31', 'UTC')>"
+        publishedAt: "<dateTimeThisDecade('now', 'UTC')>"
+        isbn: 'isbn13()'
+        authors: '<numberBetween(1, 3)>x @author*'
+        tags: '<numberBetween(1, 10)>x @tag*'
