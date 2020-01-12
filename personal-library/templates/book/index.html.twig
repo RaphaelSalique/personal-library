@@ -1,9 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% for book in books %}
-    <p>{{ book.title }}</p>
-{% else %}
-    <p>Pas de livre pour le moment</p>
-{% endfor %}
+    {% if books|length > 0 %}
+        <div class="table-container">
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Auteur(s)</th>
+                    <th>Tag(s)</th>
+                    <th>Parution</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>
+                            {% for author in book.authors %}
+                                {{ author.name }}{% if not(loop.last) %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for tag in book.tags %}
+                                <span class="tag is-info is-light">{{ tag.name }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="has-text-weight-light">
+                            {{ book.publishedAt|date('d/m/Y') }}
+                        </td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}
