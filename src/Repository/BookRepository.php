@@ -27,6 +27,22 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    /**
+     * @return Book[] Returns the list of all Books objects with Editor, Authors and Tags
+     */
+    public function listAllBooksWithRelations()
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.editor', 'editor')
+            ->addSelect('editor')
+            ->leftJoin('b.authors', 'author')
+            ->addSelect('author')
+            ->leftJoin('b.tags', 'tag')
+            ->addSelect('tag')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */
