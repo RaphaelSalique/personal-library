@@ -1,5 +1,5 @@
 <div class="table-container">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table id="books" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         {% if titleAffich is defined %}
             <caption>{{ titleAffich }} ({{ books|length }})</caption>
         {% endif %}
@@ -10,7 +10,7 @@
             <th>Éditeur</th>
             <th>Tag(s)</th>
             <th>Parution</th>
-            <th>Actions</th>
+            <th data-sort-method='none'>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -34,9 +34,7 @@
                         </a>
                     {% endfor %}
                 </td>
-                <td class="has-text-weight-light">
-                    {{ book.publishedAt|date('d/m/Y') }}
-                </td>
+                <td data-sort="{{ book.publishedAt|date('Ymd') }}" class="has-text-weight-light">{{ book.publishedAt|date('d/m/Y') }}</td>
                 <td></td>
             </tr>
         {% endfor %}

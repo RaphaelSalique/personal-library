@@ -12,7 +12,6 @@ import 'bulma/css/bulma.css';
 
 import '@fortawesome/fontawesome-free/css/all.css';
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
+const tablesort = require('tablesort');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+tablesort(document.getElementById('books'));
