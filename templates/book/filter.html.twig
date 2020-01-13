@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% set titleAffich %}
+    Liste des livres filtrés par {{ filterBook }} : {{ filterName }}
+{% endset %}
+
 {% block title %}
-    Liste des livres
+    {{ titleAffich }}
 {% endblock %}
 
 {% block body %}

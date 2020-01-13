@@ -4,7 +4,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\Editor;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -32,15 +35,65 @@ class BookRepository extends ServiceEntityRepository
      */
     public function listAllBooksWithRelations()
     {
-        return $this->createQueryBuilder('b')
-            ->leftJoin('b.editor', 'editor')
-            ->addSelect('editor')
-            ->leftJoin('b.authors', 'author')
-            ->addSelect('author')
-            ->leftJoin('b.tags', 'tag')
-            ->addSelect('tag')
+        return $this->createPreQuery()
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param Editor $editor
+     *
+     * @return Book[] Returns the list of all Books objects from Editor
+     */
+    public function listBooksFromEditor(Editor $editor)
+    {
+        return $this->createPreQuery()
+            ->where('editor.id = :editor')
+            ->setParameter('editor', $editor->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param Tag $tag
+     *
+     * @return Book[] Returns the list of all Books objects from Tag
+     */
+    public function listBooksFromTag(Tag $tag)
+    {
+        return $this->createPreQuery()
+            ->where('tag.id = :tag')
+            ->setParameter('tag', $tag->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param Author $author
+     *
+     * @return Book[] Returns the list of all Books objects from Author
+     */
+    public function listBooksFromAuthor(Author $author)
+    {
+        return $this->createPreQuery()
+            ->where('author.id = :author')
+            ->setParameter('author', $author->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function createPreQuery()
+    {
+        return $this->createQueryBuilder('b')
+        ->leftJoin('b.editor', 'editor')
+        ->addSelect('editor')
+        ->leftJoin('b.authors', 'author')
+        ->addSelect('author')
+        ->leftJoin('b.tags', 'tag')
+        ->addSelect('tag');
     }
 
     // /**

@@ -1,0 +1,45 @@
+<div class="table-container">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        {% if titleAffich is defined %}
+            <caption>{{ titleAffich }} ({{ books|length }})</caption>
+        {% endif %}
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Auteur(s)</th>
+            <th>Éditeur</th>
+            <th>Tag(s)</th>
+            <th>Parution</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>
+                    {% for author in book.authors %}
+                        <a href="{{ path('book_author', {'author': author.id}) }}">{{ author.name }}</a>{% if not(loop.last) %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('book_editor', {'editor': book.editor.id}) }}">
+                        {{ book.editor.name }}
+                    </a>
+                </td>
+                <td>
+                    {% for tag in book.tags %}
+                        <a href="{{ path('book_tag', {'tag': tag.id}) }}" class="tag is-info is-light">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                </td>
+                <td class="has-text-weight-light">
+                    {{ book.publishedAt|date('d/m/Y') }}
+                </td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
