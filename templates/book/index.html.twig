@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Liste des livres
+{% endblock %}
+
 {% block body %}
     {% if books|length > 0 %}
         <div class="table-container">
