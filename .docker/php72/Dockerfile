@@ -1,15 +1,13 @@
-FROM php:7.2-apache
-
-# On envoie le nom du serveur à apache, c'est avec ça que l'on appelera nos pages
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+FROM php:7.2.3-fpm
 
 RUN apt-get update \
-    && apt-get install -y apt-utils \
-    && apt-get install -y --no-install-recommends locales git wget libicu-dev g++ zlib1g-dev unzip \
+    && apt-get install -y apt-transport-https apt-utils \
+    && apt-get install -y --no-install-recommends vim debconf locales acl mailutils zip gnupg gnupg1 gnupg2 git wget libicu-dev g++ zlib1g-dev unzip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install \
         intl \
         opcache \
+        pdo \
         pdo_mysql \
         zip
 
@@ -17,8 +15,9 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 
-COPY php.ini /usr/local/etc/php/php.ini
+COPY php-cli.ini /usr/local/etc/php/php.ini
 COPY opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY php-fpm-pool.conf /usr/local/etc/php/pool.d/www.conf
 
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
@@ -38,5 +37,7 @@ RUN apt update && apt install yarn
 # cela va permettre que les fichiers qui sont créés dans le contenaire auront vos droits
 RUN addgroup --system raphael --gid 1000 && adduser --system raphael --uid 1000 --ingroup raphael
 
-# le repertoire qui contient vos sources (attention : dans le contenaire, donc le repertoire à droite du mapping du docker-compose)
 WORKDIR /var/www/
+
+EXPOSE 9000
+CMD ["php-fpm"]

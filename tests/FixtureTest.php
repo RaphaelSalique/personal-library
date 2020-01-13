@@ -28,5 +28,4 @@ class FixtureTest extends WebTestCase
             __DIR__.'/../src/DataFixtures/book.yml',
         ));
     }
-
 }

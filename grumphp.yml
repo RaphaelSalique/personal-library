@@ -3,9 +3,6 @@ parameters:
         composer:
             no_check_all: true
         composer_normalize: ~
-        composer_script:
-            script: "@phpcbf"
-        doctrine_orm: ~
         git_blacklist:
             keywords:
                 - "die("
@@ -15,13 +12,12 @@ parameters:
             directory: ['src', 'tests']
         phpcs:
             standard: Symfony
+            whitelist_patterns:
+                - /^src/
         phplint: ~
         phpmd:
-            ruleset: ['cleancode', 'codesize', 'controversial', 'design', 'naming', 'unusedcode']
-        phpstan:
-            level: 7
+            ruleset: ['cleancode', 'codesize', 'controversial', 'design', 'unusedcode']
+            exclude: ['build', 'src/Migrations']
         phpunitbridge: ~
         securitychecker: ~
-        twigcs:
-            path: './templates'
         yamllint: ~

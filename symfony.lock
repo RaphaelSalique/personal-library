@@ -21,7 +21,7 @@
         "version": "1.6.4"
     },
     "doctrine/common": {
-        "version": "v2.11.0"
+        "version": "2.12.0"
     },
     "doctrine/data-fixtures": {
         "version": "1.4.0"
@@ -82,16 +82,16 @@
         "version": "1.2.0"
     },
     "doctrine/migrations": {
-        "version": "2.2.0"
+        "version": "2.2.1"
     },
     "doctrine/orm": {
         "version": "v2.7.0"
     },
     "doctrine/persistence": {
-        "version": "1.3.3"
+        "version": "1.3.4"
     },
     "doctrine/reflection": {
-        "version": "v1.0.0"
+        "version": "v1.1.0"
     },
     "easycorp/easy-log-handler": {
         "version": "1.0",
@@ -106,10 +106,10 @@
         ]
     },
     "egulias/email-validator": {
-        "version": "2.1.13"
+        "version": "2.1.14"
     },
     "ergebnis/json-normalizer": {
-        "version": "0.10.1"
+        "version": "0.11.0"
     },
     "ergebnis/json-printer": {
         "version": "3.0.2"
@@ -139,7 +139,7 @@
         "version": "1.6.0"
     },
     "localheinz/composer-normalize": {
-        "version": "2.2.0"
+        "version": "2.2.1"
     },
     "localheinz/diff": {
         "version": "1.0.1"
@@ -191,22 +191,22 @@
         "version": "2.8.1"
     },
     "phpro/grumphp": {
-        "version": "v0.17.1"
+        "version": "v0.17.2"
     },
     "phpstan/extension-installer": {
         "version": "1.0.3"
     },
     "phpstan/phpstan": {
-        "version": "0.12.4"
-    },
-    "phpstan/phpstan-doctrine": {
-        "version": "0.12.8"
-    },
-    "phpstan/phpstan-phpunit": {
         "version": "0.12.5"
     },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.12.9"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.6"
+    },
     "phpstan/phpstan-symfony": {
-        "version": "0.12.2"
+        "version": "0.12.3"
     },
     "phpunit/php-timer": {
         "version": "2.1.2"
@@ -296,7 +296,7 @@
         "version": "v4.4.2"
     },
     "symfony/cache-contracts": {
-        "version": "v2.0.1"
+        "version": "v1.1.7"
     },
     "symfony/config": {
         "version": "v4.4.2"
@@ -404,7 +404,7 @@
         "version": "v4.4.2"
     },
     "symfony/http-client-contracts": {
-        "version": "v2.0.1"
+        "version": "v1.1.8"
     },
     "symfony/http-foundation": {
         "version": "v4.4.2"
@@ -451,7 +451,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "3.3",
-            "ref": "6240c6d43e8237a32452f057f81816820fd56ab6"
+            "ref": "222b46a1bb02cd04bbc59700adec2f44f1a644b7"
         },
         "files": [
             "config/packages/dev/monolog.yaml",
@@ -553,7 +553,7 @@
         "version": "v1.0.2"
     },
     "symfony/service-contracts": {
-        "version": "v2.0.1"
+        "version": "v1.1.8"
     },
     "symfony/stopwatch": {
         "version": "v4.4.2"
@@ -575,7 +575,7 @@
         ]
     },
     "symfony/translation-contracts": {
-        "version": "v2.0.1"
+        "version": "v1.1.7"
     },
     "symfony/twig-bridge": {
         "version": "v4.4.2"
@@ -671,7 +671,7 @@
         "version": "v3.0.1"
     },
     "twig/twig": {
-        "version": "v3.0.1"
+        "version": "v2.12.3"
     },
     "webmozart/assert": {
         "version": "1.6.0"
