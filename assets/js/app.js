@@ -6,12 +6,28 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import '../css/app.css';
+import '../css/app.css'
 
-import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.css'
 
-import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/css/all.css'
 
-const tablesort = require('tablesort');
+import Pagination from './pagination'
 
-tablesort(document.getElementById('books'));
+const tablesort = require('tablesort')
+const bookTable = document.getElementById('books')
+const nbBookDisplayed = 20
+
+tablesort(bookTable)
+
+const paginator = new Pagination(bookTable, nbBookDisplayed)
+paginator.init()
+
+bookTable.addEventListener('beforeSort', () => {
+    paginator.demasqueTous()
+})
+
+bookTable.addEventListener('afterSort', () => {
+    paginator.init()
+})
+
