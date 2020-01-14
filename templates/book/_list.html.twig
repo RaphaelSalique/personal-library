@@ -2,6 +2,8 @@
     <table id="books" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         {% if titleAffich is defined %}
             <caption>{{ titleAffich }} ({{ books|length }})</caption>
+        {% else %}
+            <caption>Nombre de livres : {{ books|length }}</caption>
         {% endif %}
         <thead>
         <tr>
@@ -35,7 +37,16 @@
                     {% endfor %}
                 </td>
                 <td data-sort="{{ book.publishedAt|date('Ymd') }}" class="has-text-weight-light">{{ book.publishedAt|date('d/m/Y') }}</td>
-                <td></td>
+                <td>
+                    <div class="buttons are-small">
+                        <a href="{{ path('book_edit', {'book': book.id}) }}{% if filterBook is defined %}?filter={{ filterBook }}&id_filter={{ filterId }}{% endif %}" class="button is-primary" title="Editer">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('book_delete', {'book': book.id}) }}{% if filterBook is defined %}?filter={{ filterBook }}&id_filter={{ filterId }}{% endif %}" class="button is-danger" title="Supprimer">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

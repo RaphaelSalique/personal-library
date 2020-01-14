@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Suppression du livre : "{{ book.title }}"
+{% endblock %}
+
+{% block body %}
+    <p>Suppression du livre : "{{ book.title }}"</p>
+    <p>{{ form(form) }}</p>
+{% endblock %}
+

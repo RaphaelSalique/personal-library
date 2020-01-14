@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <p><a href="{{ path('book_add') }}">Ajouter un livre</a></p>
     {% if books|length > 0 %}
         {% include "book/_list.html.twig" %}
     {% endif %}

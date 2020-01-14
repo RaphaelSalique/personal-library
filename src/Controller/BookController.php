@@ -5,10 +5,15 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Entity\Book;
 use App\Entity\Editor;
 use App\Entity\Tag;
+use App\Form\BookType;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="book_index")
      *
      * @param BookRepository $bookRepository
      *
@@ -43,6 +48,7 @@ class BookController extends AbstractController
             'books' => $bookRepository->listBooksFromEditor($editor),
             'filterBook' => 'éditeur',
             'filterName' => $editor->getName(),
+            'filterId' => $editor->getId(),
         ]);
     }
 
@@ -60,6 +66,7 @@ class BookController extends AbstractController
             'books' => $bookRepository->listBooksFromTag($tag),
             'filterBook' => 'tag',
             'filterName' => $tag->getName(),
+            'filterId' => $tag->getId(),
         ]);
     }
 
@@ -77,6 +84,122 @@ class BookController extends AbstractController
             'books' => $bookRepository->listBooksFromAuthor($author),
             'filterBook' => 'auteur',
             'filterName' => $author->getName(),
+            'filterId' => $author->getId(),
         ]);
+    }
+
+    /**
+     * @Route("/books/add", name="book_add")
+     *
+     * @param Request                $request
+     * @param EntityManagerInterface $manager
+     *
+     * @return Response
+     */
+    public function add(Request $request, EntityManagerInterface $manager): Response
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($book);
+            $manager->flush();
+            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
+            $url = $this->getUrlProvenance($request);
+
+            return $this->redirect($url);
+        }
+
+        return $this->render('book/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/books/edit/{book}", name="book_edit")
+     *
+     * @param Request                $request
+     * @param EntityManagerInterface $manager
+     * @param Book                   $book
+     *
+     * @return Response
+     */
+    public function edit(Request $request, EntityManagerInterface $manager, Book $book): Response
+    {
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($book);
+            $manager->flush();
+            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été mis à jour');
+            $url = $this->getUrlProvenance($request);
+
+            return $this->redirect($url);
+        }
+
+        return $this->render('book/edit.html.twig', [
+            'form' => $form->createView(),
+            'book' => $book,
+        ]);
+    }
+
+    /**
+     * @Route("/books/delete/{book}", name="book_delete")
+     *
+     * @param Request                $request
+     * @param EntityManagerInterface $manager
+     * @param Book                   $book
+     *
+     * @return Response
+     */
+    public function delete(Request $request, EntityManagerInterface $manager, Book $book): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('submit', SubmitType::class)
+            ->getForm()
+        ;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->remove($book);
+            $manager->flush();
+            $this->addFlash('danger', 'Le livre "'.$book->getTitle().'" a été supprimé');
+            $url = $this->getUrlProvenance($request);
+
+            return $this->redirect($url);
+        }
+
+        return $this->render('book/delete.html.twig', [
+            'form' => $form->createView(),
+            'book' => $book,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function getUrlProvenance(Request $request): string
+    {
+        $filterName = $request->get('filter');
+        $filterId = $request->get('id_filter');
+        switch ($filterName) {
+            case 'éditeur':
+                $url = $this->generateUrl('book_editor', ['editor' => $filterId]);
+                break;
+            case 'auteur':
+                $url = $this->generateUrl('book_author', ['author' => $filterId]);
+                break;
+            case 'tag':
+                $url = $this->generateUrl('book_tag', ['tag' => $filterId]);
+                break;
+            default:
+                $url = $this->generateUrl('book_index');
+        }
+
+        return $url;
     }
 }

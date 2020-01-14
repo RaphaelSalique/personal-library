@@ -18,6 +18,16 @@
 </nav>
 <section class="section">
     <div class="container is-fluid">
+        <div class="columns">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="column is-4 notification is-{{ label }} is-light">
+                        <button class="delete"></button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         {% block body %}{% endblock %}
     </div>
 </section>

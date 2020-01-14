@@ -12,6 +12,7 @@ import 'bulma/css/bulma.css'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
+// Pagination et tri du tableau
 import Pagination from './pagination'
 
 const tablesort = require('tablesort')
@@ -31,3 +32,13 @@ bookTable.addEventListener('afterSort', () => {
     paginator.init()
 })
 
+// Messages flash
+document.addEventListener('DOMContentLoaded', () => {
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        let $notification = $delete.parentNode;
+
+        $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+        });
+    });
+});
