@@ -10,6 +10,7 @@ use App\Entity\Editor;
 use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,9 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('abstract')
-            ->add('publishedAt')
+            ->add('publishedAt', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('isbn')
             ->add('editor', EntityType::class, [
                 'class' => Editor::class,
