@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Doctrine\ORM\QueryBuilder;
 
 /**
  * class AuthorRepository.
@@ -27,32 +28,41 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
-    // /**
-    //  * @return Author[] Returns an array of Author objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Author $author
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function save(Author $author)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($author);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Author
+    /**
+     * @param string $completeName
+     *
+     * @return Author|null
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findByCompleteName(string $completeName)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('a');
+        $queryBuilder
+            ->where(
+                $queryBuilder->expr()->eq(
+                    $queryBuilder->expr()->concat(
+                        'a.firstName',
+                        $queryBuilder->expr()->concat(
+                            $queryBuilder->expr()->literal(' '),
+                            'a.name'
+                        )
+                    ),
+                    ':completeName'
+                )
+            )
+            ->setParameter('completeName', $completeName);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-    */
 }

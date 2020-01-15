@@ -9,7 +9,14 @@
 {% endblock %}
 
 {% block body %}
-    <p><a href="{{ path('book_add') }}">Ajouter un livre</a></p>
+    <div class="columns">
+        <div class="column">
+            <a class="button is-primary" href="{{ path('book_add') }}">Ajouter un livre</a>
+        </div>
+        <div class="column">
+            <a class="button is-success" href="{{ path('book_add_from_barcode') }}">Ajouter un livre par scan</a>
+        </div>
+    </div>
     {% if books|length > 0 %}
         {% include "book/_list.html.twig" %}
     {% endif %}

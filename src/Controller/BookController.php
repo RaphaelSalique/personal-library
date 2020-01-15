@@ -10,6 +10,7 @@ use App\Entity\Editor;
 use App\Entity\Tag;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Services\GetBookDetail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -91,11 +92,36 @@ class BookController extends AbstractController
     /**
      * @Route("/books/add_from_barcode", name="book_add_from_barcode")
      *
+     * @param GetBookDetail          $service
+     * @param Request                $request
+     * @param EntityManagerInterface $manager
+     *
      * @return Response
      */
-    public function addFromBarcode(): Response
+    public function addFromBarcode(GetBookDetail $service, Request $request, EntityManagerInterface $manager): Response
     {
+        $data = [
+            'isbn' => null,
+        ];
+        $form = $this->createFormBuilder($data)
+            ->add('isbn')
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dataForm = $form->getData();
+            $book = $service->isbnToBook($dataForm['isbn']);
+            $manager->persist($book);
+            $manager->flush();
+            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
+            $url = $this->generateUrl('book_add_from_barcode');
+
+            return $this->redirect($url);
+        }
+
         return $this->render('book/add_from_barcode.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

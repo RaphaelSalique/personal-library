@@ -7,7 +7,7 @@ Quagga.init({
         target: document.querySelector('#interactive')
     },
     decoder: {
-        readers: ["ean"]
+        readers: ["ean_reader"]
     }
 }, (err) => {
     if (err) {
@@ -17,10 +17,9 @@ Quagga.init({
     Quagga.start()
 })
 
-Quagga.onProcessed((data) => {
-    document.getElementById('result_strip').innerHTML = 'et de un'
-})
-
 Quagga.onDetected((data) => {
-    document.getElementById('result_strip').innerHTML = 'et de deux'
+    if (data !== null) {
+        document.getElementById('form_isbn').value = data['codeResult']['code']
+        Quagga.stop()
+    }
 })

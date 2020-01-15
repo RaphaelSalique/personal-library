@@ -27,32 +27,13 @@ class EditorRepository extends ServiceEntityRepository
         parent::__construct($registry, Editor::class);
     }
 
-    // /**
-    //  * @return Editor[] Returns an array of Editor objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Editor $editor
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function save(Editor $editor)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($editor);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Editor
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
