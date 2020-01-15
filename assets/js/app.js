@@ -17,20 +17,22 @@ import Pagination from './pagination'
 
 const tablesort = require('tablesort')
 const bookTable = document.getElementById('books')
-const nbBookDisplayed = 20
+if (bookTable !== null) {
+    const nbBookDisplayed = 20
 
-tablesort(bookTable)
+    tablesort(bookTable)
 
-const paginator = new Pagination(bookTable, nbBookDisplayed)
-paginator.init()
-
-bookTable.addEventListener('beforeSort', () => {
-    paginator.demasqueTous()
-})
-
-bookTable.addEventListener('afterSort', () => {
+    const paginator = new Pagination(bookTable, nbBookDisplayed)
     paginator.init()
-})
+
+    bookTable.addEventListener('beforeSort', () => {
+        paginator.demasqueTous()
+    })
+
+    bookTable.addEventListener('afterSort', () => {
+        paginator.init()
+    })
+}
 
 // Messages flash
 document.addEventListener('DOMContentLoaded', () => {

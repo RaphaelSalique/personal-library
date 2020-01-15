@@ -89,6 +89,17 @@ class BookController extends AbstractController
     }
 
     /**
+     * @Route("/books/add_from_barcode", name="book_add_from_barcode")
+     *
+     * @return Response
+     */
+    public function addFromBarcode(): Response
+    {
+        return $this->render('book/add_from_barcode.html.twig', [
+        ]);
+    }
+
+    /**
      * @Route("/books/add", name="book_add")
      *
      * @param Request                $request
