@@ -12,3 +12,6 @@ inapache:
 
 rmdocker:
 	docker image rm personal-library_php72
+
+update:
+	docker-compose down && docker image rm personal-library_php72 && docker-compose up -d
