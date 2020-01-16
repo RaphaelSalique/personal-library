@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le tag{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Modifier le tag</h1>
+                {{ include('tag/_form.html.twig', {'button_label': 'Modifier'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
