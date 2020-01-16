@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des éditeurs{% endblock %}
+
+{% block body %}
+
+    <div class="columns">
+        <div class="column is-3-widescreen">
+            <p><a class="button is-success" href="{{ path('editor_new') }}">Créer un éditeur</a></p>
+            <br>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <caption>Liste des éditeurs ({{ editors|length }})</caption>
+                <thead>
+                <tr>
+                    <th>Désignation</th>
+                    <th data-sort-method='none'>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for editor in editors %}
+                    <tr>
+                        <td>{{ editor.name }}</td>
+                        <td>
+                            <div class="buttons">
+                                <a class="button is-primary" href="{{ path('editor_edit', {'id': editor.id}) }}" title="Modifier"><i class="fas fa-edit"></i></a>
+                                <a class="button is-danger" href="{{ path('editor_delete', {'id': editor.id}) }}" title="Supprimer"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">Pas d'éditeur</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'éditeur{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Modifier l'éditeur</h1>
+                {{ include('editor/_form.html.twig', {'button_label': 'Modifier'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
