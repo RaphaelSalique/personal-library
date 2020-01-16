@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'auteur {{ author.firstName ~ ' ' ~ author.name }}{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Supprimer l'auteur {{ author.firstName ~ ' ' ~ author.name }}</h1>
+                <br>
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

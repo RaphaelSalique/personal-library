@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+
+    <div class="columns">
+        <div class="column is-3-widescreen">
+            <p><a class="button is-success" href="{{ path('author_new') }}">Créer un auteur</a></p>
+            <br>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <caption>Liste des auteurs ({{ authors|length }})</caption>
+                <thead>
+                <tr>
+                    <th>Nom de famille</th>
+                    <th>Prénom</th>
+                    <th data-sort-method='none'>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.name }}</td>
+                        <td>{{ author.firstName }}</td>
+                        <td>
+                            <div class="buttons">
+                                <a class="button is-primary" href="{{ path('author_edit', {'id': author.id}) }}" title="Modifier"><i class="fas fa-edit"></i></a>
+                                <a class="button is-danger" href="{{ path('author_delete', {'id': author.id}) }}" title="Supprimer"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Pas d'auteur</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

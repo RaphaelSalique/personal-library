@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel auteur{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Créer un nouvel auteur</h1>
+                {{ include('author/_form.html.twig', {'button_label': 'Modifier'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

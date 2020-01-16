@@ -15,20 +15,20 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import Pagination from './pagination'
 
 const tablesort = require('tablesort')
-const bookTable = document.getElementById('books')
-if (bookTable !== null) {
+const tableElement = document.querySelector('table')
+if (tableElement !== null) {
     const nbBookDisplayed = 20
 
-    tablesort(bookTable)
+    tablesort(tableElement)
 
-    const paginator = new Pagination(bookTable, nbBookDisplayed)
+    const paginator = new Pagination(tableElement, nbBookDisplayed)
     paginator.init()
 
-    bookTable.addEventListener('beforeSort', () => {
+    tableElement.addEventListener('beforeSort', () => {
         paginator.demasqueTous()
     })
 
-    bookTable.addEventListener('afterSort', () => {
+    tableElement.addEventListener('afterSort', () => {
         paginator.init()
     })
 }
