@@ -15,22 +15,36 @@
             Home
         </a>
     </div>
-</nav>
-<section class="section">
-    <div class="container is-fluid">
-        <div class="columns">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="column is-4 notification is-{{ label }} is-light">
-                        <button class="delete"></button>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
+    <div class="navbar-menu">
+        <div class="navbar-end">
+            {% if app.user %}
+                <div class="navbar-item">
+                    {{ app.user.username }}
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
         </div>
-        {% block body %}{% endblock %}
     </div>
-</section>
+</nav>
+<div class="hero is-fullheight-with-navbar is-light">
+    <section class="section">
+        <div class="container is-fluid">
+            <div class="columns">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="column is-4 notification is-{{ label }} is-light">
+                            <button class="delete"></button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% block body %}{% endblock %}
+        </div>
+    </section>
+</div>
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}

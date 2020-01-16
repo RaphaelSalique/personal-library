@@ -1,4 +1,5 @@
 parameters:
+    stop_on_failure: true
     tasks:
         composer:
             no_check_all: true
