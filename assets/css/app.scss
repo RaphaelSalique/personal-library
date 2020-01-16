@@ -1,0 +1,79 @@
+// Styles table sort
+
+th[role=columnheader] {
+    &:not([data-sort-method="none"]) {
+        cursor: pointer;
+        &:after {
+            content: '';
+            float: right;
+            margin-top: 7px;
+            border-width: 0 4px 4px;
+            border-style: solid;
+            border-color: #404040 transparent;
+            visibility: hidden;
+            opacity: 0;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        &:hover:after {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+th[aria-sort=ascending] {
+    &:not([data-sort-method="none"]):after {
+        border-bottom: none;
+        border-width: 4px 4px 0;
+    }
+
+}
+
+th[aria-sort]:not([data-sort-method="none"]):after {
+    visibility: visible;
+    opacity: 0.4;
+}
+
+// Styles table responsive
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr, caption {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    td:before {
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before { content: "Nom : "; }
+    td:nth-of-type(2):before { content: "Auteur(s) : "; }
+    td:nth-of-type(3):before { content: "Éditeur : "; }
+    td:nth-of-type(4):before { content: "Tag(s) : "; }
+    td:nth-of-type(5):before { content: "Parution : "; }
+    td:nth-of-type(6):before { content: "Actions : "; }
+}
