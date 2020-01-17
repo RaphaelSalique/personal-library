@@ -40,14 +40,22 @@ class BatchUpdate
         $tags = $data['tags'];
 
         foreach ($books as $book) {
-            $book->removeAllAuthors();
-            $book->removeAllTags();
-            $this->entityManager->persist($book);
-            foreach ($authors as $author) {
-                $book->addAuthor($author);
+            if (\count($authors) > 0) {
+                $book->removeAllAuthors();
             }
-            foreach ($tags as $tag) {
-                $book->addTag($tag);
+            if (\count($tags) > 0) {
+                $book->removeAllTags();
+            }
+            $this->entityManager->persist($book);
+            if (\count($authors) > 0) {
+                foreach ($authors as $author) {
+                    $book->addAuthor($author);
+                }
+            }
+            if (\count($tags) > 0) {
+                foreach ($tags as $tag) {
+                    $book->addTag($tag);
+                }
             }
             $this->entityManager->persist($book);
         }
