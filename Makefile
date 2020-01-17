@@ -1,5 +1,5 @@
 help:
-	echo "Liste des cibles : preparecs indocker et rmdocker"
+	echo "Liste des cibles : preparecs inapache inphp update et rmdocker"
 
 preparecs:
 	vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
