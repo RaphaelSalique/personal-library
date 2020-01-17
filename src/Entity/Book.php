@@ -292,4 +292,36 @@ class Book
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->title;
+    }
+
+    /**
+     * @return self
+     */
+    public function removeAllAuthors(): self
+    {
+        foreach ($this->authors as $author) {
+            $this->removeAuthor($author);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return self
+     */
+    public function removeAllTags(): self
+    {
+        foreach ($this->tags as $tag) {
+            $this->removeTag($tag);
+        }
+
+        return $this;
+    }
 }

@@ -41,13 +41,13 @@ class BookType extends AbstractType
                 'class' => Author::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true,
+                'expanded' => false,
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true,
+                'expanded' => false,
             ])
             ->add('submit', SubmitType::class)
         ;

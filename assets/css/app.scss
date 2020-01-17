@@ -77,3 +77,18 @@ only screen and (max-width: 760px),
     td:nth-of-type(5):before { content: "Parution : "; }
     td:nth-of-type(6):before { content: "Actions : "; }
 }
+
+// Style form select multiple
+
+.select.is-multiple {
+    display: block;
+}
+
+.choices__list--dropdown {
+    z-index: 600 !important;
+}
+
+// Fix bug Bulma sur couleur lien button ?
+.button:visited {
+    color: white !important;
+}

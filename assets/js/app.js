@@ -33,6 +33,20 @@ if (tableElement !== null) {
     })
 }
 
+// Formulaires avec select multiple
+import 'choices.js/src/styles/base.scss'
+import 'choices.js/src/styles/choices.scss'
+
+import Choices from 'choices.js'
+
+const selectMultiples = document.querySelectorAll('[multiple="multiple"]')
+selectMultiples.forEach((element) => {
+    let choices = new Choices(element, {
+        shouldSort: true,
+        removeItemButton: true
+    })
+})
+
 // Messages flash
 document.addEventListener('DOMContentLoaded', () => {
     (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {

@@ -43,7 +43,7 @@
     {%- endif -%}
 
     {%- if inline_choice|default(false) == true -%}
-        <div {{ block('form_widget_container_attributes') }}>
+{#        <div {{ block('form_widget_container_attributes') }}>#}
     {%- endif -%}
 
     {%- set attr = attr|merge({class: (attr.class|default('') ~ ' control')|trim}) -%}
@@ -58,6 +58,7 @@
     </div>
 
     {%- if inline_choice|default(false) == true -%}
+        </div>
         </div>
     {%- endif -%}
 {%- endblock choice_widget_expanded -%}
@@ -229,3 +230,13 @@
     {%- endif -%}
     class="{{ class }}"
 {%- endblock form_widget_container_attributes -%}
+
+{%- block form -%}
+<div class="columns is-desktop">
+    <div class="column is-half-desktop is-one-third-fullhd">
+    {{ form_start(form) }}
+    {{- form_widget(form) -}}
+    {{ form_end(form) }}
+    </div>
+</div>
+{%- endblock form -%}
