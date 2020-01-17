@@ -1,7 +1,7 @@
 <?php
 namespace Deployer;
 
-require 'recipe/symfony.php';
+require 'recipe/symfony4.php';
 
 // Project name
 set('application', 'personal-library');
@@ -14,7 +14,6 @@ set('git_tty', true);
 
 // Shared files/dirs between deploys
 add('shared_files', ['.env']);
-add('shared_dirs', ['var']);
 
 // Writable dirs by web server
 add('writable_dirs', []);
