@@ -27,8 +27,8 @@ host('personal-library.salique.fr')
 
 // Tasks
 
-task('build', function () {
-    run('cd {{release_path}} && build');
+task('yarn', function () {
+    run('cd {{release_path}} && yarn install && node_modules/.bin/encore production');
 });
 
 // [Optional] if deploy fails automatically unlock.
@@ -37,4 +37,5 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 before('deploy:symlink', 'database:migrate');
+before('deploy:symlink', 'yarn');
 

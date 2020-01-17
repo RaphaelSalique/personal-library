@@ -42,6 +42,7 @@
         "symfony/symfony": "*"
     },
     "require-dev": {
+        "deployer/deployer": "^6.7",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "escapestudios/symfony2-coding-standard": "3.x-dev",
         "friendsoftwig/twigcs": "^3.2",

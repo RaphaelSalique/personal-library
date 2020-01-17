@@ -2,6 +2,12 @@
     "composer/xdebug-handler": {
         "version": "1.4.0"
     },
+    "deployer/deployer": {
+        "version": "v6.7.3"
+    },
+    "deployer/phar-update": {
+        "version": "v2.2.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
