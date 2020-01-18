@@ -13,7 +13,7 @@ set('repository', 'git@github.com:RaphaelSalique/personal-library.git');
 set('git_tty', true);
 
 // Shared files/dirs between deploys
-add('shared_files', ['.env']);
+add('shared_files', ['.env.local']);
 
 // Writable dirs by web server
 add('writable_dirs', []);
