@@ -113,6 +113,9 @@ class GetBookDetail
             if (\strlen($publishedDate) === 4) {
                 $publishedDate .= '-01-01';
             }
+            if (\strlen($publishedDate) === 7) {
+                $publishedDate .= '-01';
+            }
             $publishDate = date_create_from_format('Y-m-d', $publishedDate);
             $book->setPublishedAt($publishDate);
             $authors = $detail->getAuthors();
