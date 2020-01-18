@@ -28,6 +28,10 @@ class GetBookDetail
      * @var AuthorRepository
      */
     private $authorRepository;
+    /**
+     * @var bool
+     */
+    private $saveDatas = true;
 
     /**
      * GetBookDetail constructor.
@@ -46,42 +50,45 @@ class GetBookDetail
      * @param string $isbn
      *
      * @return Book
-     *
-     * @throws RuntimeException
      */
     public function isbnToBook(string $isbn): Book
     {
-        $response = $this->httpClient->request('GET', 'http://openlibrary.org/api/books?bibkeys=ISBN:9782070407194&jscmd=details&format=json', [
+        $response = $this->httpClient->request('GET', 'https://www.googleapis.com/books/v1/volumes', [
             'query' => [
-                'bibkeys' => 'ISBN:'.$isbn,
-                'jscmd' => 'details',
-                'format' => 'json',
+                'q' => 'isbn:'.$isbn,
             ],
         ]);
 
         $content = $response->getContent();
         if (null !== $content && '' !== $content) {
             $contents = json_decode($content, true);
-            $subArray = array_pop($contents);
-            $detail = $subArray['details'];
+            if (!array_key_exists('items', $contents)) {
+                throw new RuntimeException(sprintf("Pas de livre correspondant à l'ISBN %s - le saisir à la main ?", $isbn));
+            }
+            $subArray = array_pop($contents['items']);
+            $selfLink = $subArray['selfLink'];
+            $response = $this->httpClient->request('GET', $selfLink);
+            $content = $response->getContent();
+            $contents = json_decode($content, true);
+            $detail = $contents['volumeInfo'];
 
             $book = new Book();
             $book->setIsbn($isbn);
-            $publishers = $detail['publishers'];
-            $publisher = array_pop($publishers);
+            $publisher = $detail['publisher'];
             $editor = $this->editorRepository->findOneBy(['name' => $publisher]);
             if (null === $editor) {
                 $editor = new Editor();
                 $editor->setName($publisher);
-                $this->editorRepository->save($editor);
+                if ($this->saveDatas) {
+                    $this->editorRepository->save($editor);
+                }
             }
             $book->setEditor($editor);
             $book->setTitle($detail['title']);
-            $publishDate = date_create_from_format('F j, Y', $detail['publish_date']);
+            $publishDate = date_create_from_format('Y-m-d', $detail['publishedDate']);
             $book->setPublishedAt($publishDate);
             $authors = $detail['authors'];
-            foreach ($authors as $authorDetail) {
-                $authorName = $authorDetail['name'];
+            foreach ($authors as $authorName) {
                 $author = $this->authorRepository->findByCompleteName($authorName);
                 if (null === $author) {
                     $author = new Author();
@@ -90,7 +97,9 @@ class GetBookDetail
                     $firstName = join(' ', $nameArray);
                     $author->setName($lastName);
                     $author->setFirstName($firstName);
-                    $this->authorRepository->save($author);
+                    if ($this->saveDatas) {
+                        $this->authorRepository->save($author);
+                    }
                 }
                 $book->addAuthor($author);
             }
@@ -99,5 +108,13 @@ class GetBookDetail
         }
 
         throw new RuntimeException("Pas de livre correpondant à l'ISBN $isbn !");
+    }
+
+    /**
+     * disable saveData
+     */
+    public function disableSaveData(): void
+    {
+        $this->saveDatas = false;
     }
 }

@@ -111,11 +111,16 @@ class BookController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dataForm = $form->getData();
-            $book = $service->isbnToBook($dataForm['isbn']);
-            $manager->persist($book);
-            $manager->flush();
-            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
-            $url = $this->generateUrl('book_add_from_barcode');
+            try {
+                $book = $service->isbnToBook($dataForm['isbn']);
+                $manager->persist($book);
+                $manager->flush();
+                $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
+                $url = $this->generateUrl('book_add_from_barcode');
+            } catch (\Exception $exception) {
+                $this->addFlash('danger', $exception->getMessage());
+                $url = $this->generateUrl('book_add');
+            }
 
             return $this->redirect($url);
         }
