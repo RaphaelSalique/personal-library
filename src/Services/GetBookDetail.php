@@ -72,15 +72,15 @@ class GetBookDetail
         if (\count($items) > 0) {
             /** @var \Google_Service_Books_Volume $item */
             $item = array_pop($items);
-            $selfLink = $item->selfLink;
-            $response = $this->httpClient->request('GET', $selfLink);
-            $content = $response->getContent();
-            $contents = json_decode($content, true);
-            $detail = $contents['volumeInfo'];
+            $selfId  = $item->id;
+            /** @var \Google_Service_Books_Volume $detail */
+            $detail = $service->volumes->get($selfId);
 
+            /** @var \Google_Service_Books_VolumeVolumeInfo $detail */
+            $detail = $detail->getVolumeInfo();
             $book = new Book();
             $book->setIsbn($isbn);
-            $publisher = $detail['publisher'];
+            $publisher = $detail->getPublisher();
             $editor = $this->editorRepository->findOneBy(['name' => $publisher]);
             if (null === $editor) {
                 $editor = new Editor();
@@ -90,10 +90,10 @@ class GetBookDetail
                 }
             }
             $book->setEditor($editor);
-            $book->setTitle($detail['title']);
-            $publishDate = date_create_from_format('Y-m-d', $detail['publishedDate']);
+            $book->setTitle($detail->getTitle());
+            $publishDate = date_create_from_format('Y-m-d', $detail->getPublishedDate());
             $book->setPublishedAt($publishDate);
-            $authors = $detail['authors'];
+            $authors = $detail->getAuthors();
             foreach ($authors as $authorName) {
                 $author = $this->authorRepository->findByCompleteName($authorName);
                 if (null === $author) {
