@@ -1,6 +1,6 @@
 mysql
 ###> symfony/framework-bundle ###
-/.env
+/.env.local
 /.bundle
 /public/bundles/
 /public/document/
