@@ -10,17 +10,18 @@ use App\Repository\AuthorRepository;
 use App\Repository\EditorRepository;
 use Google_Service_Books;
 use RuntimeException;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlHandler;
 
 /**
  * Class GetBookDetail
+ * @SuppressWarnings(PHPMD)
  */
 class GetBookDetail
 {
-    /**
-     * @var HttpClientInterface
-     */
-    private $httpClient;
     /**
      * @var EditorRepository
      */
@@ -40,15 +41,13 @@ class GetBookDetail
 
     /**
      * GetBookDetail constructor.
-     * @param string              $googleKey
-     * @param \Google_Client      $client
-     * @param HttpClientInterface $httpClient
-     * @param EditorRepository    $editorRepository
-     * @param AuthorRepository    $authorRepository
+     * @param string           $googleKey
+     * @param \Google_Client   $client
+     * @param EditorRepository $editorRepository
+     * @param AuthorRepository $authorRepository
      */
-    public function __construct(string $googleKey, \Google_Client $client, HttpClientInterface $httpClient, EditorRepository $editorRepository, AuthorRepository $authorRepository)
+    public function __construct(string $googleKey, \Google_Client $client, EditorRepository $editorRepository, AuthorRepository $authorRepository)
     {
-        $this->httpClient = $httpClient;
         $this->editorRepository = $editorRepository;
         $this->authorRepository = $authorRepository;
         $this->client = $client;
@@ -63,8 +62,26 @@ class GetBookDetail
      */
     public function isbnToBook(string $isbn): Book
     {
+        $countryCode = 'FR';
         $service = new Google_Service_Books($this->client);
         $optParams = [];
+
+        $handler = new CurlHandler();
+        $stack = HandlerStack::create($handler);
+        $stack->push(Middleware::mapRequest(function ($request) use ($countryCode) {
+            $request = $request->withUri(Uri::withQueryValue(
+                $request->getUri(),
+                'country',
+                $countryCode
+            ));
+
+            return $request;
+        }));
+        $guzzle = new Client([
+            'handler' => $stack,
+        ]);
+
+        $this->client->setHttpClient($guzzle);
         $results = $service->volumes->listVolumes('isbn:'.$isbn, $optParams);
 
         $items = $results->getItems();
