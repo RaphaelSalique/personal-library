@@ -8,6 +8,7 @@ use App\Entity\Book;
 use App\Entity\Editor;
 use App\Repository\AuthorRepository;
 use App\Repository\EditorRepository;
+use Google_Service_Books;
 use RuntimeException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -32,18 +33,27 @@ class GetBookDetail
      * @var bool
      */
     private $saveDatas = true;
+    /**
+     * @var \Google_Client
+     */
+    private $client;
 
     /**
      * GetBookDetail constructor.
+     * @param string              $googleKey
+     * @param \Google_Client      $client
      * @param HttpClientInterface $httpClient
      * @param EditorRepository    $editorRepository
      * @param AuthorRepository    $authorRepository
      */
-    public function __construct(HttpClientInterface $httpClient, EditorRepository $editorRepository, AuthorRepository $authorRepository)
+    public function __construct(string $googleKey, \Google_Client $client, HttpClientInterface $httpClient, EditorRepository $editorRepository, AuthorRepository $authorRepository)
     {
         $this->httpClient = $httpClient;
         $this->editorRepository = $editorRepository;
         $this->authorRepository = $authorRepository;
+        $this->client = $client;
+        $this->client->setApplicationName("Client_Library_Examples");
+        $this->client->setDeveloperKey($googleKey);
     }
 
     /**
@@ -53,20 +63,16 @@ class GetBookDetail
      */
     public function isbnToBook(string $isbn): Book
     {
-        $response = $this->httpClient->request('GET', 'https://www.googleapis.com/books/v1/volumes', [
-            'query' => [
-                'q' => 'isbn:'.$isbn,
-            ],
-        ]);
+        $service = new Google_Service_Books($this->client);
+        $optParams = [];
+        $results = $service->volumes->listVolumes('isbn:'.$isbn, $optParams);
 
-        $content = $response->getContent();
-        if (null !== $content && '' !== $content) {
-            $contents = json_decode($content, true);
-            if (!array_key_exists('items', $contents)) {
-                throw new RuntimeException(sprintf("Pas de livre correspondant à l'ISBN %s - le saisir à la main ?", $isbn));
-            }
-            $subArray = array_pop($contents['items']);
-            $selfLink = $subArray['selfLink'];
+        $items = $results->getItems();
+
+        if (\count($items) > 0) {
+            /** @var \Google_Service_Books_Volume $item */
+            $item = array_pop($items);
+            $selfLink = $item->selfLink;
             $response = $this->httpClient->request('GET', $selfLink);
             $content = $response->getContent();
             $contents = json_decode($content, true);
@@ -106,8 +112,7 @@ class GetBookDetail
 
             return $book;
         }
-
-        throw new RuntimeException("Pas de livre correpondant à l'ISBN $isbn !");
+        throw new RuntimeException(sprintf("Pas de livre correspondant à l'ISBN %s - le saisir à la main ?", $isbn));
     }
 
     /**
