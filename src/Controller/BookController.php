@@ -119,6 +119,8 @@ class BookController extends AbstractController
                 $url = $this->generateUrl('book_add_from_barcode');
             } catch (\Exception $exception) {
                 $this->addFlash('danger', $exception->getMessage());
+                $this->addFlash('danger', $exception->getFile().' '.$exception->getLine());
+                $this->addFlash('danger', $exception->getTraceAsString());
                 $url = $this->generateUrl('book_add');
             }
 
