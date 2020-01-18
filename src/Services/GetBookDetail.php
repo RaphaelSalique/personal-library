@@ -108,7 +108,12 @@ class GetBookDetail
             }
             $book->setEditor($editor);
             $book->setTitle($detail->getTitle());
-            $publishDate = date_create_from_format('Y-m-d', $detail->getPublishedDate());
+
+            $publishedDate = $detail->getPublishedDate();
+            if (\strlen($publishedDate) === 4) {
+                $publishedDate .= '-01-01';
+            }
+            $publishDate = date_create_from_format('Y-m-d', $publishedDate);
             $book->setPublishedAt($publishDate);
             $authors = $detail->getAuthors();
             foreach ($authors as $authorName) {
