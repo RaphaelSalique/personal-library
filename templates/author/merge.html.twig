@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fusionner des auteurs{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Fusionner des auteurs</h1>
+                {{ include('author/_form.html.twig', {'button_label': 'Confirmer'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

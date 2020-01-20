@@ -2,10 +2,14 @@
 // License proprietary
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\Editor;
 use App\Form\EditorType;
 use App\Repository\EditorRepository;
+use App\Services\EditorMerge;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,6 +115,59 @@ class EditorController extends AbstractController
         return $this->render('editor/delete.html.twig', [
             'form' => $form->createView(),
             'editor' => $editor,
+        ]);
+    }
+
+    /**
+     * @Route("/merge", name="editor_merge", methods={"GET","POST"})
+     *
+     * @param Request     $request
+     * @param EditorMerge $mergeService
+     *
+     * @return Response
+     */
+    public function merge(Request $request, EditorMerge $mergeService): Response
+    {
+        $data = [
+            'editors' => [],
+            'master' => null,
+        ];
+        $form = $this->createFormBuilder($data)
+            ->add('editors', EntityType::class, [
+                'class' => Editor::class,
+                'multiple' => true,
+                'label' => 'Éditeurs à fusionner (autre que le master)',
+                'query_builder' => function (EntityRepository $repo) {
+                    return $repo->createQueryBuilder('e')
+                    ->orderBy('e.name', 'ASC');
+                },
+            ])
+            ->add('master', EntityType::class, [
+                'class' => Editor::class,
+                'label' => 'Master (les autres éditeurs seront fusionnés en lui)',
+                'query_builder' => function (EntityRepository $repo) {
+                    return $repo->createQueryBuilder('e')
+                        ->orderBy('e.name', 'ASC');
+                },
+            ])
+            ->getForm()
+        ;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $editors = $data['editors'];
+            /** @var Editor $master */
+            $master = $data['master'];
+            $mergeService->merge($editors, $master);
+
+            $this->addFlash('success', 'Les éditeurs ont été fusionnés !');
+
+            return $this->redirectToRoute('editor_index');
+        }
+
+        return $this->render('editor/merge.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

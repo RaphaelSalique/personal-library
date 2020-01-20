@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fusionner des éditeurs{% endblock %}
+
+{% block body %}
+    <div class="columns">
+        <div class="column is-4">
+            <div class="box">
+                <h1>Fusionner des éditeurs</h1>
+                {{ include('editor/_form.html.twig', {'button_label': 'Confirmer'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
