@@ -1,4 +1,4 @@
-FROM php:7.2.3-fpm
+FROM php:7.4.13-fpm
 
 RUN apt-get update \
     && apt-get install -y apt-transport-https apt-utils \
@@ -25,7 +25,7 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
 RUN wget https://get.symfony.com/cli/installer -O - | bash && mv ~/.symfony/bin/symfony /usr/local/bin/symfony
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
 # Yarn
