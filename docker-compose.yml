@@ -9,7 +9,7 @@ services:
             - ./.docker/conf:/etc/apache2/sites-enabled
             - .:/var/www/personal-library
         depends_on:
-          - php72
+          - php74
     db:
       image: mysql:8
       container_name: db
@@ -29,15 +29,15 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
-            - "8080:80"
+            - "8086:80"
         links:
             - db
         environment:
           PMA_HOST: db
 
-    php72:
-        build: ./.docker/php72
-        container_name: php72
+    php74:
+        build: ./.docker/php74
+        container_name: php74
         depends_on:
           - db
         volumes:
