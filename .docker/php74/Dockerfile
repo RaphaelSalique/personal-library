@@ -2,7 +2,7 @@ FROM php:7.4.13-fpm
 
 RUN apt-get update \
     && apt-get install -y apt-transport-https apt-utils \
-    && apt-get install -y --no-install-recommends vim debconf locales acl mailutils zip gnupg gnupg1 gnupg2 git wget libicu-dev g++ zlib1g-dev unzip \
+    && apt-get install -y --no-install-recommends vim debconf locales acl mailutils zip libzip-dev gnupg gnupg1 gnupg2 git wget libicu-dev g++ zlib1g-dev unzip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install \
         intl \
