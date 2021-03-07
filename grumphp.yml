@@ -1,4 +1,4 @@
-parameters:
+grumphp:
     stop_on_failure: true
     tasks:
         composer:
@@ -20,5 +20,5 @@ parameters:
             ruleset: ['cleancode', 'codesize', 'controversial', 'design', 'unusedcode']
             exclude: ['build', 'src/Migrations']
         phpunitbridge: ~
-        securitychecker: ~
+        securitychecker_symfony: ~
         yamllint: ~
