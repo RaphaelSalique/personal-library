@@ -30,7 +30,7 @@
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "5.2.*"
     },
     "replace": {
         "paragonie/random_compat": "2.*",
