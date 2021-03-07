@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71949e165ba36dcc80b19476a09ce1bc",
+    "content-hash": "c3bc8e88a74efe06e1bcf939d741b73c",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7721,16 +7721,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.1.1",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b02fa41f3783a2616eccef7b92fbc2343ffed737"
+                "reference": "1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b02fa41f3783a2616eccef7b92fbc2343ffed737",
-                "reference": "b02fa41f3783a2616eccef7b92fbc2343ffed737",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5",
+                "reference": "1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5",
                 "shasum": ""
             },
             "require": {
@@ -7745,7 +7745,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -7789,7 +7789,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-27T19:28:23+00:00"
+            "time": "2021-02-08T09:54:36+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -8054,7 +8054,8 @@
                 "multi-processing",
                 "multi-threading"
             ],
-            "time": "2020-04-27T15:12:37+00:00"
+            "abandoned": true,
+            "time": "2019-12-12T13:45:57+00:00"
         },
         {
             "name": "amphp/parallel-functions",
@@ -8892,27 +8893,26 @@
         },
         {
             "name": "friendsoftwig/twigcs",
-            "version": "v3.2.2",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/friendsoftwig/twigcs.git",
-                "reference": "7c4bc76dad8d851045b9eeab4979a240550f8300"
+                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/7c4bc76dad8d851045b9eeab4979a240550f8300",
-                "reference": "7c4bc76dad8d851045b9eeab4979a240550f8300",
+                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/d85fa2a567eb2671186558f92c53e86cdd502c3b",
+                "reference": "d85fa2a567eb2671186558f92c53e86cdd502c3b",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "pimple/pimple": "^3.0",
-                "symfony/console": "^2.7 || ^3.0 || ^4.0 || ^5.0",
-                "symfony/finder": "^2.7 || ^3.0 || ^4.0 || ^5.0",
-                "twig/twig": "^1.41 || ^2.10 || ^3.0"
+                "php": "^7.2 || ^8.0",
+                "symfony/console": "^3.4 || ^4.3 || ^5.0",
+                "symfony/filesystem": "^3.4 || ^4.3 || ^5.0",
+                "symfony/finder": "^3.4 || ^4.3 || ^5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.2 || ^6.5"
+                "phpunit/phpunit": "^8.0 || ^9.0"
             },
             "bin": [
                 "bin/twigcs"
@@ -8920,8 +8920,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Allocine\\Twigcs\\": "src/",
-                    "Allocine\\Twigcs\\Tests\\": "tests/"
+                    "FriendsOfTwig\\Twigcs\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -8930,12 +8929,12 @@
             ],
             "authors": [
                 {
-                    "name": "OwlyCode",
+                    "name": "Tristan Maindron",
                     "email": "tmaindron@gmail.com"
                 }
             ],
             "description": "Checkstyle automation for Twig",
-            "time": "2019-10-26T10:36:59+00:00"
+            "time": "2021-02-04T13:46:25+00:00"
         },
         {
             "name": "gitonomy/gitlib",
@@ -10219,21 +10218,21 @@
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.3.1",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "21e45061c3429b1e06233475cc0e1f6fc774d5b0"
+                "reference": "86406047271859ffc13424a048541f4531f53601"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/21e45061c3429b1e06233475cc0e1f6fc774d5b0",
-                "reference": "21e45061c3429b1e06233475cc0e1f6fc774d5b0",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/86406047271859ffc13424a048541f4531f53601",
+                "reference": "86406047271859ffc13424a048541f4531f53601",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
-                "psr/container": "^1.0"
+                "psr/container": "^1.1"
             },
             "require-dev": {
                 "symfony/phpunit-bridge": "^5.0"
@@ -10241,7 +10240,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3.x-dev"
+                    "dev-master": "3.4.x-dev"
                 }
             },
             "autoload": {
@@ -10265,7 +10264,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2020-11-24T20:35:42+00:00"
+            "time": "2021-03-06T08:28:00+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -10774,6 +10773,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
+            "abandoned": "https://github.com/fabpot/local-php-security-checker",
             "time": "2019-11-01T13:20:14+00:00"
         },
         {
