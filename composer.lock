@@ -6835,16 +6835,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v4.4.20",
+            "version": "v4.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "2271b6d577018a7dea75a9162a08ac84f8234deb"
+                "reference": "eb8f5428cc3b40d6dffe303b195b084f1c5fbd14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/2271b6d577018a7dea75a9162a08ac84f8234deb",
-                "reference": "2271b6d577018a7dea75a9162a08ac84f8234deb",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/eb8f5428cc3b40d6dffe303b195b084f1c5fbd14",
+                "reference": "eb8f5428cc3b40d6dffe303b195b084f1c5fbd14",
                 "shasum": ""
             },
             "require": {
@@ -6916,7 +6916,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-26T13:53:48+00:00"
+            "time": "2021-03-23T16:25:01+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -8864,12 +8864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/djoos/Symfony-coding-standard.git",
-                "reference": "1524e573f5061555af3c363f0948c444d8522499"
+                "reference": "5cc7ad11da242182d9776b98b950d5565c32acd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djoos/Symfony-coding-standard/zipball/1524e573f5061555af3c363f0948c444d8522499",
-                "reference": "1524e573f5061555af3c363f0948c444d8522499",
+                "url": "https://api.github.com/repos/djoos/Symfony-coding-standard/zipball/5cc7ad11da242182d9776b98b950d5565c32acd0",
+                "reference": "5cc7ad11da242182d9776b98b950d5565c32acd0",
                 "shasum": ""
             },
             "require": {
@@ -8909,7 +8909,7 @@
                 "phpcs",
                 "symfony"
             ],
-            "time": "2021-01-18T12:40:14+00:00"
+            "time": "2021-03-24T15:17:16+00:00"
         },
         {
             "name": "fakerphp/faker",
