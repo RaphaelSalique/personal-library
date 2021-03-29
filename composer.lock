@@ -3184,16 +3184,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.20",
+            "version": "v4.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c98349bda966c70d6c08b4cd8658377c94166492"
+                "reference": "1ba4560dbbb9fcf5ae28b61f71f49c678086cf23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c98349bda966c70d6c08b4cd8658377c94166492",
-                "reference": "c98349bda966c70d6c08b4cd8658377c94166492",
+                "url": "https://api.github.com/repos/symfony/console/zipball/1ba4560dbbb9fcf5ae28b61f71f49c678086cf23",
+                "reference": "1ba4560dbbb9fcf5ae28b61f71f49c678086cf23",
                 "shasum": ""
             },
             "require": {
@@ -3266,7 +3266,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-22T18:44:15+00:00"
+            "time": "2021-03-26T09:23:24+00:00"
         },
         {
             "name": "symfony/debug",
@@ -8864,12 +8864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/djoos/Symfony-coding-standard.git",
-                "reference": "1524e573f5061555af3c363f0948c444d8522499"
+                "reference": "5cc7ad11da242182d9776b98b950d5565c32acd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djoos/Symfony-coding-standard/zipball/1524e573f5061555af3c363f0948c444d8522499",
-                "reference": "1524e573f5061555af3c363f0948c444d8522499",
+                "url": "https://api.github.com/repos/djoos/Symfony-coding-standard/zipball/5cc7ad11da242182d9776b98b950d5565c32acd0",
+                "reference": "5cc7ad11da242182d9776b98b950d5565c32acd0",
                 "shasum": ""
             },
             "require": {
@@ -8909,7 +8909,7 @@
                 "phpcs",
                 "symfony"
             ],
-            "time": "2021-01-18T12:40:14+00:00"
+            "time": "2021-03-24T15:17:16+00:00"
         },
         {
             "name": "fakerphp/faker",
