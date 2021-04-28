@@ -144,6 +144,9 @@
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "friendsoftwig/twigcs": {
         "version": "v3.2.2"
     },
@@ -182,6 +185,12 @@
     },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
+    },
+    "laminas/laminas-code": {
+        "version": "4.2.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.1"
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
