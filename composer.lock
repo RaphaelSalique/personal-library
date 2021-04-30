@@ -1612,16 +1612,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.171.0",
+            "version": "v0.172.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "b45ddc3d82b2c8f328d869d55db88c1885d898ee"
+                "reference": "85e8a9f0062a9e1aba3cdc0f499968bc8de78b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b45ddc3d82b2c8f328d869d55db88c1885d898ee",
-                "reference": "b45ddc3d82b2c8f328d869d55db88c1885d898ee",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/85e8a9f0062a9e1aba3cdc0f499968bc8de78b7d",
+                "reference": "85e8a9f0062a9e1aba3cdc0f499968bc8de78b7d",
                 "shasum": ""
             },
             "require": {
@@ -1645,7 +1645,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2021-04-20T20:34:12+00:00"
+            "time": "2021-04-27T16:21:24+00:00"
         },
         {
             "name": "google/auth",
@@ -10242,22 +10242,22 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "0.12.27",
+            "version": "0.12.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "a3b3976441534082e971228f0ad4d5ab51ba20b1"
+                "reference": "e4b9ea96b78057a758ac648986d2339259448293"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/a3b3976441534082e971228f0ad4d5ab51ba20b1",
-                "reference": "a3b3976441534082e971228f0ad4d5ab51ba20b1",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/e4b9ea96b78057a758ac648986d2339259448293",
+                "reference": "e4b9ea96b78057a758ac648986d2339259448293",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^0.12.83"
+                "phpstan/phpstan": "^0.12.85"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -10268,12 +10268,12 @@
                 "phpstan/phpstan-phpunit": "^0.12.16",
                 "phpstan/phpstan-strict-rules": "^0.12.5",
                 "phpunit/phpunit": "^7.5.20",
-                "symfony/config": "^4.2",
-                "symfony/console": "^4.0",
-                "symfony/framework-bundle": "^4.0",
-                "symfony/http-foundation": "^4.0",
-                "symfony/messenger": "^4.2",
-                "symfony/serializer": "^4.0"
+                "symfony/config": "^4.2 || ^5.0",
+                "symfony/console": "^4.0 || ^5.0",
+                "symfony/framework-bundle": "^4.0 || ^5.0",
+                "symfony/http-foundation": "^4.0 || ^5.0",
+                "symfony/messenger": "^4.2 || ^5.0",
+                "symfony/serializer": "^4.0 || ^5.0"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -10304,7 +10304,7 @@
                 }
             ],
             "description": "Symfony Framework extensions and rules for PHPStan",
-            "time": "2021-04-25T16:29:33+00:00"
+            "time": "2021-04-27T09:18:16+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
