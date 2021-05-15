@@ -4026,16 +4026,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.2.4",
+            "version": "v5.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "0d639a0943822626290d169965804f79400e6a04"
+                "reference": "eccb8be70d7a6a2230d05f6ecede40f3fdd9e252"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/0d639a0943822626290d169965804f79400e6a04",
-                "reference": "0d639a0943822626290d169965804f79400e6a04",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/eccb8be70d7a6a2230d05f6ecede40f3fdd9e252",
+                "reference": "eccb8be70d7a6a2230d05f6ecede40f3fdd9e252",
                 "shasum": ""
             },
             "require": {
@@ -4080,7 +4080,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-15T18:55:04+00:00"
+            "time": "2021-05-10T14:39:23+00:00"
         },
         {
             "name": "symfony/flex",
@@ -9917,16 +9917,16 @@
         },
         {
             "name": "phpro/grumphp",
-            "version": "v1.3.1",
+            "version": "v1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpro/grumphp.git",
-                "reference": "7df8f36481b9cdb5b21fedb1cdb2999234eac3e5"
+                "reference": "991ce1f59c525a2784a03a93d1082ece70b5bba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpro/grumphp/zipball/7df8f36481b9cdb5b21fedb1cdb2999234eac3e5",
-                "reference": "7df8f36481b9cdb5b21fedb1cdb2999234eac3e5",
+                "url": "https://api.github.com/repos/phpro/grumphp/zipball/991ce1f59c525a2784a03a93d1082ece70b5bba8",
+                "reference": "991ce1f59c525a2784a03a93d1082ece70b5bba8",
                 "shasum": ""
             },
             "require": {
@@ -9956,7 +9956,7 @@
             },
             "require-dev": {
                 "brianium/paratest": "^6.1.1",
-                "composer/composer": "^1.10.11 || ^2.0.1",
+                "composer/composer": "^1.10.22 || ^2.0.13",
                 "nikic/php-parser": "~4.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpspec/phpspec": "^6.2",
@@ -10024,7 +10024,7 @@
                 }
             ],
             "description": "A composer plugin that enables source code quality checks.",
-            "time": "2021-02-04T06:26:46+00:00"
+            "time": "2021-05-12T14:14:35+00:00"
         },
         {
             "name": "phpstan/extension-installer",
