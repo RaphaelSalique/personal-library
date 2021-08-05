@@ -790,9 +790,9 @@
     ndarray "^1.0.19"
     ndarray-linear-interpolate "^1.0.0"
 
-"@fortawesome/fontawesome-free@^5.15.3":
-  version "5.15.3"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.3.tgz#c36ffa64a2a239bf948541a97b6ae8d729e09a9a"
+"@fortawesome/fontawesome-free@^5.15.4":
+  version "5.15.4"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz#ecda5712b61ac852c760d8b3c79c96adca5554e5"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
