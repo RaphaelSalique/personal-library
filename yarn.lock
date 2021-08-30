@@ -781,12 +781,12 @@
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.3.tgz#90420f9f9c6d3987f176a19a7d8e764271a2f55d"
 
-"@ericblade/quagga2@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@ericblade/quagga2/-/quagga2-1.4.1.tgz#60e2441fecbab34d8c9a0ced0e5f2af6a17afe4f"
+"@ericblade/quagga2@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@ericblade/quagga2/-/quagga2-1.4.2.tgz#caaa8793f52ef4a99ea703de95c15731aa41e60e"
   dependencies:
     "@babel/polyfill" "^7.12.1"
-    get-pixels "^3.3.2"
+    get-pixels "^3.3.3"
     gl-mat2 "^1.0.1"
     gl-vec2 "^1.3.0"
     gl-vec3 "^1.1.3"
@@ -2357,12 +2357,12 @@ get-intrinsic@^1.0.2:
     has "^1.0.3"
     has-symbols "^1.0.1"
 
-get-pixels@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/get-pixels/-/get-pixels-3.3.2.tgz#3f62fb8811932c69f262bba07cba72b692b4ff03"
+get-pixels@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/get-pixels/-/get-pixels-3.3.3.tgz#71e2dfd4befb810b5478a61c6354800976ce01c7"
   dependencies:
     data-uri-to-buffer "0.0.3"
-    jpeg-js "^0.3.2"
+    jpeg-js "^0.4.1"
     mime-types "^2.0.1"
     ndarray "^1.0.13"
     ndarray-pack "^1.1.1"
@@ -2869,9 +2869,9 @@ jest-worker@^27.0.2:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jpeg-js@^0.3.2:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.3.7.tgz#471a89d06011640592d314158608690172b1028d"
+jpeg-js@^0.4.1:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.3.tgz#6158e09f1983ad773813704be80680550eff977b"
 
 js-base64@^2.1.8:
   version "2.6.4"
