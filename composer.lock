@@ -305,16 +305,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "3.1.2",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "a036d90c303f3163b5be8b8fde9b6755b2be4a3a"
+                "reference": "6d970a11479275300b5144e9373ce5feacfa9b91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/a036d90c303f3163b5be8b8fde9b6755b2be4a3a",
-                "reference": "a036d90c303f3163b5be8b8fde9b6755b2be4a3a",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/6d970a11479275300b5144e9373ce5feacfa9b91",
+                "reference": "6d970a11479275300b5144e9373ce5feacfa9b91",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +387,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-10T20:18:51+00:00"
+            "time": "2021-10-19T06:47:22+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -9405,16 +9405,16 @@
         },
         {
             "name": "liip/test-fixtures-bundle",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipTestFixturesBundle.git",
-                "reference": "54d797af9871d9feaba4fe1ad5536b978a86bdaa"
+                "reference": "ddc176357f55982172de200867f67f831ef9bae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/54d797af9871d9feaba4fe1ad5536b978a86bdaa",
-                "reference": "54d797af9871d9feaba4fe1ad5536b978a86bdaa",
+                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/ddc176357f55982172de200867f67f831ef9bae6",
+                "reference": "ddc176357f55982172de200867f67f831ef9bae6",
                 "shasum": ""
             },
             "require": {
@@ -9424,6 +9424,9 @@
                 "symfony/event-dispatcher-contracts": "^1 || ^2",
                 "symfony/framework-bundle": "^4.4 || ^5.0",
                 "symfony/yaml": "^4.4 || ^5.0"
+            },
+            "conflict": {
+                "doctrine/dbal": "<2.11"
             },
             "require-dev": {
                 "doctrine/cache": "^1.10.0",
@@ -9480,7 +9483,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2021-08-19T11:22:21+00:00"
+            "time": "2021-10-20T12:28:11+00:00"
         },
         {
             "name": "localheinz/composer-normalize",
