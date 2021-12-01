@@ -9522,25 +9522,25 @@
         },
         {
             "name": "liip/test-fixtures-bundle",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipTestFixturesBundle.git",
-                "reference": "879bdea2df04e10167ac5af75664e5304af46ab3"
+                "reference": "87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/879bdea2df04e10167ac5af75664e5304af46ab3",
-                "reference": "879bdea2df04e10167ac5af75664e5304af46ab3",
+                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a",
+                "reference": "87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "^2.13 || ^3.0",
                 "php": "^7.2 || ^8.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.0",
+                "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
                 "symfony/event-dispatcher-contracts": "^1 || ^2",
-                "symfony/framework-bundle": "^4.4 || ^5.0",
-                "symfony/yaml": "^4.4 || ^5.0"
+                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
+                "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
             },
             "conflict": {
                 "doctrine/dbal": "<2.11"
@@ -9556,10 +9556,10 @@
                 "jackalope/jackalope-doctrine-dbal": "^1.5",
                 "monolog/monolog": "^1.25.1 || ^2.0",
                 "phpunit/phpunit": "^7.5 || ^8.0",
-                "symfony/doctrine-bridge": "^4.4 || ^5.0",
-                "symfony/monolog-bridge": "^4.4 || ^5.0",
+                "symfony/doctrine-bridge": "^4.4 || ^5.4 || ^6.0",
+                "symfony/monolog-bridge": "^4.4 || ^5.4 || ^6.0",
                 "symfony/monolog-bundle": "^3.2",
-                "symfony/phpunit-bridge": "^4.4 || ^5.0",
+                "symfony/phpunit-bridge": "^4.4 || ^5.4 || ^6.0",
                 "theofidry/alice-data-fixtures": "^1.0.1"
             },
             "suggest": {
@@ -9600,7 +9600,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2021-11-21T23:40:14+00:00"
+            "time": "2021-11-30T21:44:13+00:00"
         },
         {
             "name": "localheinz/composer-normalize",
