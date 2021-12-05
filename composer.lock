@@ -9522,23 +9522,23 @@
         },
         {
             "name": "liip/test-fixtures-bundle",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipTestFixturesBundle.git",
-                "reference": "87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a"
+                "reference": "2a93babdd6711621f16b2b5563737f144fe22a57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a",
-                "reference": "87e1f4437b24a57c2d6dc1cd51bc9c3364d4e24a",
+                "url": "https://api.github.com/repos/liip/LiipTestFixturesBundle/zipball/2a93babdd6711621f16b2b5563737f144fe22a57",
+                "reference": "2a93babdd6711621f16b2b5563737f144fe22a57",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "^2.13 || ^3.0",
                 "php": "^7.2 || ^8.0",
                 "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
-                "symfony/event-dispatcher-contracts": "^1 || ^2",
+                "symfony/event-dispatcher-contracts": "^1 || ^2 || ^3",
                 "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
                 "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
             },
@@ -9600,7 +9600,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2021-11-30T21:44:13+00:00"
+            "time": "2021-12-01T20:54:49+00:00"
         },
         {
             "name": "localheinz/composer-normalize",
