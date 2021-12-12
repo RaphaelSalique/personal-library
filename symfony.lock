@@ -23,6 +23,9 @@
     "amphp/sync": {
         "version": "v1.4.0"
     },
+    "composer/pcre": {
+        "version": "1.0.0"
+    },
     "composer/xdebug-handler": {
         "version": "1.4.0"
     },
