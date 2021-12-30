@@ -1,4 +1,5 @@
 <?php
+
 // Licence proprietary
 
 namespace App\Services;

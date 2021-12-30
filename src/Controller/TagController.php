@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Controller;
 
@@ -103,7 +104,7 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->remove($tag);
             $manager->flush();
-            $this->addFlash('danger', 'Le tag "'.$tag->getName().'" a été supprimé');
+            $this->addFlash('danger', 'Le tag "' . $tag->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('tag_index');
         }

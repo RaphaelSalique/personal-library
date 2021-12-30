@@ -115,11 +115,11 @@ class BookController extends AbstractController
                 $book = $service->isbnToBook($dataForm['isbn']);
                 $manager->persist($book);
                 $manager->flush();
-                $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
+                $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
                 $url = $this->generateUrl('book_add_from_barcode');
             } catch (\Exception $exception) {
                 $this->addFlash('danger', $exception->getMessage());
-                $this->addFlash('danger', $exception->getFile().' '.$exception->getLine());
+                $this->addFlash('danger', $exception->getFile() . ' ' . $exception->getLine());
                 $this->addFlash('danger', $exception->getTraceAsString());
                 $url = $this->generateUrl('book_add');
             }
@@ -149,7 +149,7 @@ class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($book);
             $manager->flush();
-            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été créé');
+            $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);
@@ -177,7 +177,7 @@ class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($book);
             $manager->flush();
-            $this->addFlash('success', 'Le livre "'.$book->getTitle().'" a été mis à jour');
+            $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été mis à jour');
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);
@@ -209,7 +209,7 @@ class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->remove($book);
             $manager->flush();
-            $this->addFlash('danger', 'Le livre "'.$book->getTitle().'" a été supprimé');
+            $this->addFlash('danger', 'Le livre "' . $book->getTitle() . '" a été supprimé');
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);

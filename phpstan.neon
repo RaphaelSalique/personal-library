@@ -6,3 +6,5 @@ parameters:
         objectManagerLoader: build/phpstan/doctrine-orm-bootstrap.php
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
+    excludePaths:
+       - src/Kernel.php
