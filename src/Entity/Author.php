@@ -22,26 +22,26 @@ class Author
      *
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $firstName;
+    private string $firstName;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="authors")
      *
-     * @var Collection<Author, Book>
+     * @var Collection&iterable<Book>
      */
     private $books;
 
@@ -144,6 +144,6 @@ class Author
      */
     public function __toString(): string
     {
-        return (string) $this->firstName.' '.(string) $this->name;
+        return (string) $this->firstName . ' ' . (string) $this->name;
     }
 }

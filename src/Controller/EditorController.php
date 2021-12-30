@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Controller;
 
@@ -107,7 +108,7 @@ class EditorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->remove($editor);
             $manager->flush();
-            $this->addFlash('danger', 'L\'éditeur "'.$editor->getName().'" a été supprimé');
+            $this->addFlash('danger', 'L\'éditeur "' . $editor->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('editor_index');
         }

@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Controller;
 
@@ -106,7 +107,7 @@ class AuthorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->remove($author);
             $manager->flush();
-            $this->addFlash('danger', 'L\'auteur "'.$author->getName().'" a été supprimé');
+            $this->addFlash('danger', 'L\'auteur "' . $author->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('author_index');
         }
