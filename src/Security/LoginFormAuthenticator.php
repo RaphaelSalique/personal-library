@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Security;
 
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -29,10 +31,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     use TargetPathTrait;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    /**
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
@@ -47,14 +45,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * LoginFormAuthenticator constructor.
-     * @param EntityManagerInterface       $entityManager
      * @param UrlGeneratorInterface        $urlGenerator
      * @param CsrfTokenManagerInterface    $csrfTokenManager
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
@@ -104,10 +103,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new InvalidCsrfTokenException('Invalid CSRF');
         }
 
-        $user = $userProvider->loadUserByUsername($credentials['email']);
-
-        if (!$user) {
-            // fail authentication with a custom error
+        try {
+            $user = $userProvider->loadUserByIdentifier($credentials['email']);
+        } catch (UserNotFoundException $exception) {
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
@@ -127,7 +125,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
-     * @param $credentials
+     * @param mixed $credentials
      *
      * @return string|null
      */

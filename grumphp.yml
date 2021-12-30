@@ -12,13 +12,22 @@ grumphp:
         phpcpd:
             directory: ['src', 'tests']
         phpcs:
-            standard: Symfony
+            standard: PSR12
             whitelist_patterns:
                 - /^src/
         phplint: ~
         phpmd:
-            ruleset: ['cleancode', 'codesize', 'controversial', 'design', 'unusedcode']
-            exclude: ['build', 'src/Migrations']
-        phpunitbridge: ~
+            whitelist_patterns:
+                - /src\/Command\/(.*)/
+                - /src\/Controller\/(.*)/
+                - /src\/Entity\/(.*)/
+                - /src\/Repository\/(.*)/
+                - /src\/Service\/(.*)/
+            ruleset: [ 'phpmd.xml' ]
+        phpstan:
+            configuration: './phpstan.neon'
+            level: 8
+            memory_limit: "-1"
+#        phpunitbridge: ~
         securitychecker_symfony: ~
         yamllint: ~
