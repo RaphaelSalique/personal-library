@@ -6,8 +6,9 @@ namespace App\Repository;
 
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use function Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * class AuthorRepository.
@@ -31,9 +32,10 @@ class AuthorRepository extends ServiceEntityRepository
     /**
      * @param Author $author
      *
+     * @throws ORMException
      * @throws \Doctrine\ORM\ORMException
      */
-    public function save(Author $author)
+    public function save(Author $author): void
     {
         $this->_em->persist($author);
     }
@@ -43,9 +45,9 @@ class AuthorRepository extends ServiceEntityRepository
      *
      * @return Author|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
-    public function findByCompleteName(string $completeName)
+    public function findByCompleteName(string $completeName): ?Author
     {
         $queryBuilder = $this->createQueryBuilder('a');
         $queryBuilder

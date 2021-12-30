@@ -4,3 +4,5 @@ parameters:
         console_application_loader: build/phpstan/console-loader.php
     doctrine:
         objectManagerLoader: build/phpstan/doctrine-orm-bootstrap.php
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false

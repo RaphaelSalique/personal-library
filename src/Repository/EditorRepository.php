@@ -6,7 +6,8 @@ namespace App\Repository;
 
 use App\Entity\Editor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class EditorRepository.
@@ -30,9 +31,10 @@ class EditorRepository extends ServiceEntityRepository
     /**
      * @param Editor $editor
      *
+     * @throws ORMException
      * @throws \Doctrine\ORM\ORMException
      */
-    public function save(Editor $editor)
+    public function save(Editor $editor): void
     {
         $this->_em->persist($editor);
     }
