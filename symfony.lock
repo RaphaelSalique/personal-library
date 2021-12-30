@@ -138,6 +138,9 @@
     "ergebnis/json-printer": {
         "version": "3.0.2"
     },
+    "ergebnis/json-schema-validator": {
+        "version": "2.0.0"
+    },
     "escapestudios/symfony2-coding-standard": {
         "version": "3.x-dev"
     },
