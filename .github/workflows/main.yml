@@ -43,4 +43,6 @@ jobs:
 
       - name: Run PHPUnit
         run: |
+          ./bin/console d:d:c --env=test
+          ./bin/console d:s:u --force --env=test
           ./vendor/bin/phpunit
