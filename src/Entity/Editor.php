@@ -22,19 +22,19 @@ class Editor
      *
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="editor", orphanRemoval=true)
      *
-     * @var Collection<Editor, Book>
+     * @var Collection&iterable<Book>
      */
     private $books;
 
@@ -92,24 +92,6 @@ class Editor
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
             $book->setEditor($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Book $book
-     *
-     * @return $this
-     */
-    public function removeBook(Book $book): self
-    {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
-            // set the owning side to null (unless already changed)
-            if ($book->getEditor() === $this) {
-                $book->setEditor(null);
-            }
         }
 
         return $this;
