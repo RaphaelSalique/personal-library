@@ -142,7 +142,7 @@
         "version": "2.0.0"
     },
     "fakerphp/faker": {
-        "version": "v1.13.0"
+        "version": "v1.17.0"
     },
     "firebase/php-jwt": {
         "version": "v5.0.0"
@@ -208,7 +208,7 @@
         "version": "1.9.4"
     },
     "nelmio/alice": {
-        "version": "3.2",
+        "version": "3.9",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
@@ -796,7 +796,7 @@
         "version": "v4.4.2"
     },
     "theofidry/alice-data-fixtures": {
-        "version": "1.0",
+        "version": "1.5",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",

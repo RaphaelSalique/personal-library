@@ -43,4 +43,4 @@ jobs:
 
       - name: Run PHPUnit
         run: |
-          ./bin/phpunit
+          ./vendor/bin/phpunit

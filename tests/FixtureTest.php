@@ -3,8 +3,7 @@
 
 namespace App\Tests;
 
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
-use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
+use Fidry\AliceDataFixtures\Loader\PurgerLoader;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -12,14 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class FixtureTest extends WebTestCase
 {
-    /** @var AbstractDatabaseTool */
+    /** @var PurgerLoader|object|null */
     protected $databaseTool;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->databaseTool = static::getContainer()->get(DatabaseToolCollection::class)->get();
+        $this->databaseTool = static::getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
     }
 
     /**
@@ -27,11 +26,13 @@ class FixtureTest extends WebTestCase
      */
     public function testRemplissage(): void
     {
-        $this->databaseTool->loadFixtures([
-            __DIR__.'/../src/DataFixtures/author.yml',
-            __DIR__.'/../src/DataFixtures/editor.yml',
-            __DIR__.'/../src/DataFixtures/tag.yml',
-            __DIR__.'/../src/DataFixtures/book.yml',
-        ]);
+        if ($this->databaseTool instanceof PurgerLoader) {
+            $this->databaseTool->load([
+              __DIR__.'/../src/DataFixtures/author.yml',
+              __DIR__.'/../src/DataFixtures/editor.yml',
+              __DIR__.'/../src/DataFixtures/tag.yml',
+              __DIR__.'/../src/DataFixtures/book.yml',
+            ]);
+        }
     }
 }
