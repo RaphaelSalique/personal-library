@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Command;
 
@@ -24,7 +25,7 @@ class CreateUserCommand extends Command
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * CreateUserCommand constructor.
@@ -43,7 +44,7 @@ class CreateUserCommand extends Command
     /**
      * configure
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Add a short description for your command')
@@ -62,21 +63,21 @@ class CreateUserCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $style = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
 
         if ('' === trim($email) || '' === trim($password)) {
             throw new InvalidArgumentException('Paramètres insuffisants');
         }
-        $io->note(sprintf('Création de l\'utilisateur %s avec le mot de passe %s', $email, $password));
+        $style->note(sprintf('Création de l\'utilisateur %s avec le mot de passe %s', $email, $password));
         $user = new User();
         $user->setEmail($email);
         $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $io->success('Terminé !');
+        $style->success('Terminé !');
 
         return 0;
     }
