@@ -146,4 +146,12 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    /**
+     * Returns the identifier for this user (e.g. its username or email address).
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->getEmail();
+    }
 }
