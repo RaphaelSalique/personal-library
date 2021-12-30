@@ -9,7 +9,8 @@ use App\Entity\Book;
 use App\Entity\Editor;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class BookRepository.
@@ -33,7 +34,7 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns the list of all Books objects with Editor, Authors and Tags
      */
-    public function listAllBooksWithRelations()
+    public function listAllBooksWithRelations(): array
     {
         return $this->createPreQuery()
             ->getQuery()
@@ -45,7 +46,7 @@ class BookRepository extends ServiceEntityRepository
      *
      * @return Book[] Returns the list of all Books objects from Editor
      */
-    public function listBooksFromEditor(Editor $editor)
+    public function listBooksFromEditor(Editor $editor): array
     {
         return $this->createPreQuery()
             ->where('editor.id = :editor')
@@ -59,7 +60,7 @@ class BookRepository extends ServiceEntityRepository
      *
      * @return Book[] Returns the list of all Books objects from Tag
      */
-    public function listBooksFromTag(Tag $tag)
+    public function listBooksFromTag(Tag $tag): array
     {
         return $this->createPreQuery()
             ->where('tag.id = :tag')
@@ -73,7 +74,7 @@ class BookRepository extends ServiceEntityRepository
      *
      * @return Book[] Returns the list of all Books objects from Author
      */
-    public function listBooksFromAuthor(Author $author)
+    public function listBooksFromAuthor(Author $author): array
     {
         return $this->createPreQuery()
             ->where('author.id = :author')
@@ -83,9 +84,9 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
-    private function createPreQuery()
+    private function createPreQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('b')
         ->leftJoin('b.editor', 'editor')
@@ -95,33 +96,4 @@ class BookRepository extends ServiceEntityRepository
         ->leftJoin('b.tags', 'tag')
         ->addSelect('tag');
     }
-
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Book
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

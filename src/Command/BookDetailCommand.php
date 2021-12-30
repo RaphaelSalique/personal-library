@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Command;
 
@@ -18,7 +19,7 @@ class BookDetailCommand extends Command
     /**
      * @var GetBookDetail
      */
-    private $getBookDetail;
+    private GetBookDetail $getBookDetail;
 
     /**
      * BookDetailCommand constructor.
@@ -38,7 +39,7 @@ class BookDetailCommand extends Command
     /**
      * configuration
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Renvoie les détails d\'un livre selon ISBN')
@@ -54,19 +55,19 @@ class BookDetailCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $style = new SymfonyStyle($input, $output);
         $isbn = trim($input->getArgument('isbn'));
 
         if ('' !== $isbn) {
-            $io->note(sprintf('ISBN demandé: %s', $isbn));
+            $style->note(sprintf('ISBN demandé: %s', $isbn));
             try {
                 $this->getBookDetail->disableSaveData();
                 $book = $this->getBookDetail->isbnToBook($isbn);
-                $io->success("Livre trouvé ".$book->getTitle());
+                $style->success("Livre trouvé " . $book->getTitle());
             } catch (\Exception $exception) {
-                $io->warning($exception->getMessage());
-                $io->warning($exception->getTraceAsString());
-                $io->warning($exception->getFile().' '.$exception->getLine());
+                $style->warning($exception->getMessage());
+                $style->warning($exception->getTraceAsString());
+                $style->warning($exception->getFile() . ' ' . $exception->getLine());
             }
         }
 
