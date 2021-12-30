@@ -1,4 +1,5 @@
 <?php
+
 // Licence proprietary
 
 namespace App\Services;
@@ -8,7 +9,12 @@ use App\Entity\Book;
 use App\Entity\Editor;
 use App\Repository\AuthorRepository;
 use App\Repository\EditorRepository;
+use DateTimeInterface;
+use Google\Service\Books\VolumeVolumeInfo;
+use Google_Client;
 use Google_Service_Books;
+use Google_Service_Books_Volume;
+use Google_Service_Books_VolumeVolumeInfo;
 use RuntimeException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Uri;
@@ -35,19 +41,23 @@ class GetBookDetail
      */
     private $saveDatas = true;
     /**
-     * @var \Google_Client
+     * @var Google_Client
      */
     private $client;
 
     /**
      * GetBookDetail constructor.
      * @param string           $googleKey
-     * @param \Google_Client   $client
+     * @param Google_Client    $client
      * @param EditorRepository $editorRepository
      * @param AuthorRepository $authorRepository
      */
-    public function __construct(string $googleKey, \Google_Client $client, EditorRepository $editorRepository, AuthorRepository $authorRepository)
-    {
+    public function __construct(
+        string $googleKey,
+        Google_Client $client,
+        EditorRepository $editorRepository,
+        AuthorRepository $authorRepository
+    ) {
         $this->editorRepository = $editorRepository;
         $this->authorRepository = $authorRepository;
         $this->client = $client;
@@ -82,19 +92,18 @@ class GetBookDetail
         ]);
 
         $this->client->setHttpClient($guzzle);
-        $results = $service->volumes->listVolumes('isbn:'.$isbn, $optParams);
+        $results = $service->volumes->listVolumes('isbn:' . $isbn, $optParams);
 
         $items = $results->getItems();
 
         if (\count($items) > 0) {
-            /** @var \Google_Service_Books_Volume $item */
+            /** @var Google_Service_Books_Volume $item */
             $item = array_pop($items);
             $selfId  = $item->id;
-            /** @var \Google_Service_Books_Volume $detail */
-            $detail = $service->volumes->get($selfId);
+            /** @var Google_Service_Books_Volume $volumeGet */
+            $volumeGet = $service->volumes->get($selfId);
 
-            /** @var \Google_Service_Books_VolumeVolumeInfo $detail */
-            $detail = $detail->getVolumeInfo();
+            $detail = $volumeGet->getVolumeInfo();
             $book = new Book();
             $book->setIsbn($isbn);
             $publisher = $detail->getPublisher();
@@ -116,6 +125,7 @@ class GetBookDetail
             if (\strlen($publishedDate) === 7) {
                 $publishedDate .= '-01';
             }
+            /** @var DateTimeInterface $publishDate */
             $publishDate = date_create_from_format('Y-m-d', $publishedDate);
             $book->setPublishedAt($publishDate);
             $authors = $detail->getAuthors();

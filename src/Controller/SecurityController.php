@@ -1,4 +1,5 @@
 <?php
+
 // License proprietary
 namespace App\Controller;
 
@@ -41,6 +42,7 @@ class SecurityController extends AbstractController
      */
     public function logout(): void
     {
-        throw new RuntimeException('This method can be blank - it will be intercepted by the logout key on your firewall');
+        throw new RuntimeException('This method can be blank - it will be intercepted by the logout key on '
+          . 'your firewall');
     }
 }

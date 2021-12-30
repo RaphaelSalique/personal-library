@@ -1,17 +1,14 @@
-help:
-	echo "Liste des cibles : preparecs inapache inphp update et rmdocker"
+proxy:
+	symfony proxy:start &
 
-preparecs:
-	vendor/bin/phpcs --config-set installed_paths vendor/escapestudios/symfony2-coding-standard
+dns:
+	symfony proxy:domain:attach personal-library &
 
-inphp:
-	docker-compose run --user="1000" php72 bash;
+serve:
+	symfony serve --no-tls &
 
-inapache:
-	docker-compose run apache bash;
+docker:
+	docker-compose up -d
 
-rmdocker:
-	docker image rm personal-library_php72
-
-update:
-	docker-compose down && docker image rm personal-library_php72 && docker-compose up -d
+all: proxy dns serve docker
+	npm run watch
