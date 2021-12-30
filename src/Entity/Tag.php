@@ -22,33 +22,33 @@ class Tag
      *
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="tags")
      *
      * @var Tag|null
      */
-    private $parent;
+    private ?Tag $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tag", mappedBy="parent")
      *
-     * @var Collection<Tag, Tag>
+     * @var Collection&iterable<Tag>
      */
     private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="tags")
      *
-     * @var Collection<Tag, Book>
+     * @var Collection&iterable<Book>
      */
     private $books;
 
@@ -90,7 +90,7 @@ class Tag
     }
 
     /**
-     * @return $this(Tag)|null
+     * @return Tag|null
      */
     public function getParent(): ?self
     {

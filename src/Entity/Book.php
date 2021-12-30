@@ -24,7 +24,7 @@ class Book
      *
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Editor", inversedBy="books")
@@ -32,21 +32,21 @@ class Book
      *
      * @var Editor
      */
-    private $editor;
+    private Editor $editor;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
      * @var string|null
      */
-    private $abstract;
+    private ?string $abstract;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,26 +60,26 @@ class Book
      *
      * @var \DateTimeInterface
      */
-    private $publishedAt;
+    private DateTimeInterface $publishedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $isbn;
+    private string $isbn;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
      *
-     * @var Collection<Book, Author>
+     * @var Collection&iterable<Author>
      */
     private $authors;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="books")
      *
-     * @var Collection<Book, Tag>
+     * @var Collection&iterable<Tag>
      */
     private $tags;
 
@@ -110,11 +110,11 @@ class Book
     }
 
     /**
-     * @param Editor|null $editor
+     * @param Editor $editor
      *
      * @return $this
      */
-    public function setEditor(?Editor $editor): self
+    public function setEditor(Editor $editor): self
     {
         $this->editor = $editor;
 
