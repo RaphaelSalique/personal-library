@@ -7,20 +7,23 @@ namespace App\Services;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Editor;
+use App\Exception\NoIsbnBookException;
 use App\Repository\AuthorRepository;
 use App\Repository\EditorRepository;
 use DateTimeInterface;
-use Google\Service\Books\VolumeVolumeInfo;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\NonUniqueResultException;
 use Google_Client;
 use Google_Service_Books;
 use Google_Service_Books_Volume;
-use Google_Service_Books_VolumeVolumeInfo;
-use RuntimeException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
+
+use function count;
+use function strlen;
 
 /**
  * Class GetBookDetail
@@ -31,19 +34,19 @@ class GetBookDetail
     /**
      * @var EditorRepository
      */
-    private $editorRepository;
+    private EditorRepository $editorRepository;
     /**
      * @var AuthorRepository
      */
-    private $authorRepository;
+    private AuthorRepository $authorRepository;
     /**
      * @var bool
      */
-    private $saveDatas = true;
+    private bool $saveDatas = true;
     /**
      * @var Google_Client
      */
-    private $client;
+    private Google_Client $client;
 
     /**
      * GetBookDetail constructor.
@@ -69,6 +72,9 @@ class GetBookDetail
      * @param string $isbn
      *
      * @return Book
+     * @throws ORMException
+     * @throws NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function isbnToBook(string $isbn): Book
     {
@@ -78,14 +84,12 @@ class GetBookDetail
 
         $handler = new CurlHandler();
         $stack = HandlerStack::create($handler);
-        $stack->push(Middleware::mapRequest(function ($request) use ($countryCode) {
-            $request = $request->withUri(Uri::withQueryValue(
+        $stack->push(Middleware::mapRequest(static function ($request) use ($countryCode) {
+            return $request->withUri(Uri::withQueryValue(
                 $request->getUri(),
                 'country',
                 $countryCode
             ));
-
-            return $request;
         }));
         $guzzle = new Client([
             'handler' => $stack,
@@ -96,7 +100,7 @@ class GetBookDetail
 
         $items = $results->getItems();
 
-        if (\count($items) > 0) {
+        if (count($items) > 0) {
             /** @var Google_Service_Books_Volume $item */
             $item = array_pop($items);
             $selfId  = $item->id;
@@ -107,22 +111,15 @@ class GetBookDetail
             $book = new Book();
             $book->setIsbn($isbn);
             $publisher = $detail->getPublisher();
-            $editor = $this->editorRepository->findOneBy(['name' => $publisher]);
-            if (null === $editor) {
-                $editor = new Editor();
-                $editor->setName($publisher);
-                if ($this->saveDatas) {
-                    $this->editorRepository->save($editor);
-                }
-            }
+            $editor = $this->getEditor($publisher);
             $book->setEditor($editor);
             $book->setTitle($detail->getTitle());
 
             $publishedDate = $detail->getPublishedDate();
-            if (\strlen($publishedDate) === 4) {
+            if (strlen($publishedDate) === 4) {
                 $publishedDate .= '-01-01';
             }
-            if (\strlen($publishedDate) === 7) {
+            if (strlen($publishedDate) === 7) {
                 $publishedDate .= '-01';
             }
             /** @var DateTimeInterface $publishDate */
@@ -135,7 +132,7 @@ class GetBookDetail
                     $author = new Author();
                     $nameArray = explode(' ', $authorName);
                     $lastName = array_pop($nameArray);
-                    $firstName = join(' ', $nameArray);
+                    $firstName = implode(' ', $nameArray);
                     $author->setName($lastName);
                     $author->setFirstName($firstName);
                     if ($this->saveDatas) {
@@ -147,7 +144,7 @@ class GetBookDetail
 
             return $book;
         }
-        throw new RuntimeException(sprintf("Pas de livre correspondant à l'ISBN %s - le saisir à la main ?", $isbn));
+        throw new NoIsbnBookException(sprintf("Pas de livre correspondant à l'ISBN %s - le saisir à la main ?", $isbn));
     }
 
     /**
@@ -156,5 +153,24 @@ class GetBookDetail
     public function disableSaveData(): void
     {
         $this->saveDatas = false;
+    }
+
+    /**
+     * @param string $publisher
+     * @return Editor
+     * @throws ORMException
+     * @throws \Doctrine\ORM\ORMException
+     */
+    private function getEditor(string $publisher): Editor
+    {
+        $editor = $this->editorRepository->findOneBy(['name' => $publisher]);
+        if (null === $editor) {
+            $editor = new Editor();
+            $editor->setName($publisher);
+            if ($this->saveDatas) {
+                $this->editorRepository->save($editor);
+            }
+        }
+        return $editor;
     }
 }
