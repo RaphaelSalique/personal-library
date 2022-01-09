@@ -1,0 +1,15 @@
+image: php:7.4
+
+before_script:
+    # Install dependencies
+    - bash ci/docker_install.sh > /dev/null
+
+personal-liibrary:ci:
+    tags:
+        - firstci
+    script:
+        - composer install
+        - ./vendor/bin/phpmd src text phpmd.xml
+        - ./vendor/bin/phpcs --standard=PSR12 src
+        - ./vendor/bin/phpstan analyse src --level=8
+#        - ./bin/phpunit On attend que Google ait fixé les erreurs de GoogleApi
