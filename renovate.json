@@ -1,16 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [ "config:base" ],
-  "prHourlyLimit": 0, // Unlimited MRs per hour
-  "prConcurrentLimit": 0, // Unlimited opened MRs in every moment
-  "baseBranches": [ "devel" ], // Base branch, MR is merged into this one
-  "enabledManagers": [ "npm", "docker-compose", "dockerfile", "gitlabci", "composer" ],
-  // Add labels to every MR based on language and update type
   "packageRules": [
-    { "updateTypes": ["major"], "addLabels": ["SemVer Major"] },
-    { "updateTypes": ["minor"], "addLabels": ["SemVer Minor"] },
-    { "updateTypes": ["patch", "digest", "bump"], "addLabels": ["SemVer Patch"] },
-    { "languages": ["php"], "addLabels": ["Lang PHP"] },
-    { "languages": ["js"], "addLabels": ["Lang JS"] }
+    {
+      "depTypeList": [ "devDependencies", "require-dev" ],
+      "updateTypes": [ "patch", "minor", "digest"],
+      "groupName": "devDependencies (non-major)"
+    }
+  ],
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    ":dependencyDashboard",
+    ":rebaseStalePrs",
+    ":enableVulnerabilityAlertsWithLabel('security')",
+    ":group:recommended"
   ]
 }
+
