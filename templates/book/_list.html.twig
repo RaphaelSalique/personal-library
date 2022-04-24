@@ -11,6 +11,7 @@
             <th>Éditeur</th>
             <th>Tag(s)</th>
             <th>Parution</th>
+            <th>Date d'ajout</th>
             <th data-sort-method='none'>Actions</th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
                     {% endfor %}
                 </td>
                 <td data-sort="{{ book.publishedAt|date('Ymd') }}" class="has-text-weight-light">{{ book.publishedAt|date('d/m/Y') }}</td>
+                <td data-sort="{{ book.createdAt|date('YmdHis') }}" class="has-text-weight-light">{{ book.createdAt|date('d/m/Y à H:i') }}</td>
                 <td>
                     <div class="buttons are-small">
                         <a href="{{ path('book_edit', {'book': book.id}) }}{% if filterBook is defined %}?filter={{ filterBook }}&id_filter={{ filterId }}{% endif %}" class="button is-primary" title="Editer">

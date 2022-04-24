@@ -1,5 +1,6 @@
 export default class Pagination {
-    constructor(tableau, nbDisplayed) {
+    constructor(tableau, nbDisplayed)
+    {
         this.tableau = tableau
         this.nbDisplayed = nbDisplayed
         this.tbody = this.tableau.querySelector('tbody')
@@ -7,7 +8,8 @@ export default class Pagination {
         this.ul = null
         this.tfoot = null
     }
-    demasqueSurIntervalle(min) {
+    demasqueSurIntervalle(min)
+    {
         const max = min + this.nbDisplayed
         const trs = this.tbody.children
         for (let i = 0; i < this.total; i++) {
@@ -18,7 +20,8 @@ export default class Pagination {
         }
 
     }
-    demasqueTous() {
+    demasqueTous()
+    {
         let total = this.tbody.childElementCount
         const trs = this.tbody.children
         for (let i = 0; i < total; i++) {
@@ -27,16 +30,18 @@ export default class Pagination {
         this.tableau.removeChild(this.tfoot)
 
     }
-    marqueCurrent(current) {
-       this.ul.children.forEach((li, index) => {
-           let a = li.querySelector('a')
-           a.classList.remove('is-current')
-           if (index === current) {
-               a.classList.add('is-current')
-           }
-       })
+    marqueCurrent(current)
+    {
+        Array.from(this.ul.children).forEach((li, index) => {
+            let a = li.querySelector('a')
+            a.classList.remove('is-current')
+            if (index === current) {
+                a.classList.add('is-current')
+            }
+        })
     }
-    init() {
+    init()
+    {
         if (this.total > this.nbDisplayed) {
             this.demasqueSurIntervalle(0)
             this.tfoot = document.createElement('tfoot')
