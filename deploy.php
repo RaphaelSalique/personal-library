@@ -7,7 +7,7 @@ require 'recipe/symfony4.php';
 set('application', 'personal-library');
 
 // Project repository
-set('repository', 'ssh://git@gitlab.salique.fr:2224/raphaelsalique/personal-library.git');
+set('repository', 'git@gitlab.salique.fr:2224/raphaelsalique/personal-library.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -21,7 +21,7 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('salique.fr')
+host('personal-library.salique.fr')
     ->port('2707')
     ->set('deploy_path', '~/{{application}}');
 
