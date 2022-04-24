@@ -16,8 +16,9 @@ set('git_tty', true);
 add('shared_files', ['.env.local']);
 
 // Writable dirs by web server
-add('writable_dirs', []);
+//add('writable_dirs', []);
 
+set('writable_dirs', ['var/cache', 'var/log', 'var/sessions']);
 
 // Hosts
 
