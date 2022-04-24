@@ -29,7 +29,8 @@ host('personal-library.salique.fr')
 // Tasks
 
 task('yarn', function () {
-    run('cd {{release_path}} && yarn install && node_modules/.bin/encore production');
+    run('cd {{release_path}} && /home/ubuntu/.nvm/versions/node/v16.14.0/bin/yarn install && '.
+    'node_modules/.bin/encore production');
 });
 
 // [Optional] if deploy fails automatically unlock.
