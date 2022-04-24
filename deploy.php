@@ -22,6 +22,7 @@ add('writable_dirs', []);
 // Hosts
 
 host('personal-library.salique.fr')
+    ->user('ubuntu')
     ->port('2707')
     ->set('deploy_path', '~/{{application}}');
 
