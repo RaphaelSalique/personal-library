@@ -7,7 +7,7 @@ require 'recipe/symfony4.php';
 set('application', 'personal-library');
 
 // Project repository
-set('repository', 'git@gitlab.salique.fr:2224/raphaelsalique/personal-library.git');
+set('repository', 'git@github.com:RaphaelSalique/personal-library.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
