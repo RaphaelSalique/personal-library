@@ -26,12 +26,6 @@ host('personal-library.salique.fr')
     ->port('2707')
     ->set('deploy_path', '~/{{application}}');
 
-// Tasks
-
-task('yarn', function () {
-    run('cd {{release_path}} && /home/ubuntu/.nvm/versions/node/v16.14.0/bin/yarn install && '.
-    'node_modules/.bin/encore production');
-});
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
@@ -39,5 +33,4 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 before('deploy:symlink', 'database:migrate');
-before('deploy:symlink', 'yarn');
 
