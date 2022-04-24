@@ -31,25 +31,25 @@ final class Version20200107204953 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, editor_id INT NOT NULL, title '
+        $this->addSql('CREATE TABLE IF NOT EXISTS book (id INT AUTO_INCREMENT NOT NULL, editor_id INT NOT NULL, title '
           . 'VARCHAR(255) NOT NULL, abstract LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, published_at '
           . 'DATETIME NOT NULL, isbn VARCHAR(255) NOT NULL, INDEX IDX_CBE5A3316995AC4C (editor_id), PRIMARY KEY(id)) '
           . 'DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE book_author (book_id INT NOT NULL, author_id INT NOT NULL, INDEX '
+        $this->addSql('CREATE TABLE IF NOT EXISTS book_author (book_id INT NOT NULL, author_id INT NOT NULL, INDEX '
           . 'IDX_9478D34516A2B381 (book_id), INDEX IDX_9478D345F675F31B (author_id), PRIMARY KEY(book_id, author_id)) '
           . 'DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE book_tag (book_id INT NOT NULL, tag_id INT NOT NULL, INDEX IDX_F2F4CE1516A2B381'
+        $this->addSql('CREATE TABLE IF NOT EXISTS book_tag (book_id INT NOT NULL, tag_id INT NOT NULL, INDEX IDX_F2F4CE1516A2B381'
           . ' (book_id), INDEX IDX_F2F4CE15BAD26311 (tag_id), PRIMARY KEY(book_id, tag_id)) DEFAULT CHARACTER SET '
           . 'utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A3316995AC4C FOREIGN KEY (editor_id) REFERENCES '
+        $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A3316995AC4C FOREIGN KEY IF NOT EXISTS (editor_id) REFERENCES '
           . 'editor (id)');
-        $this->addSql('ALTER TABLE book_author ADD CONSTRAINT FK_9478D34516A2B381 FOREIGN KEY (book_id) REFERENCES '
+        $this->addSql('ALTER TABLE book_author ADD CONSTRAINT FK_9478D34516A2B381 FOREIGN KEY IF NOT EXISTS (book_id) REFERENCES '
           . 'book (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE book_author ADD CONSTRAINT FK_9478D345F675F31B FOREIGN KEY (author_id) '
+        $this->addSql('ALTER TABLE book_author ADD CONSTRAINT FK_9478D345F675F31B FOREIGN KEY IF NOT EXISTS (author_id) '
           . 'REFERENCES author (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE book_tag ADD CONSTRAINT FK_F2F4CE1516A2B381 FOREIGN KEY (book_id) '
+        $this->addSql('ALTER TABLE book_tag ADD CONSTRAINT FK_F2F4CE1516A2B381 FOREIGN KEY IF NOT EXISTS (book_id) '
           . 'REFERENCES book (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE book_tag ADD CONSTRAINT FK_F2F4CE15BAD26311 FOREIGN KEY (tag_id) '
+        $this->addSql('ALTER TABLE book_tag ADD CONSTRAINT FK_F2F4CE15BAD26311 FOREIGN KEY IF NOT EXISTS (tag_id) '
           . 'REFERENCES tag (id) ON DELETE CASCADE');
     }
 
