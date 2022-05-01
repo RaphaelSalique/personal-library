@@ -16,28 +16,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/author")
- */
+#[Route(path: '/author')]
 class AuthorController extends AbstractController
 {
-    private EntityManagerInterface $manager;
-
-    /**
-     * @param EntityManagerInterface $manager
-     */
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(private readonly EntityManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
-    /**
-     * @Route("/", name="author_index", methods={"GET"})
-     *
-     * @param AuthorRepository $authorRepository
-     *
-     * @return Response
-     */
+    #[Route(path: '/', name: 'author_index', methods: ['GET'])]
     public function index(AuthorRepository $authorRepository): Response
     {
         return $this->render('author/index.html.twig', [
@@ -45,65 +31,41 @@ class AuthorController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="author_new", methods={"GET","POST"})
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
+    #[Route(path: '/new', name: 'author_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($author);
             $this->manager->flush();
 
             return $this->redirectToRoute('author_index');
         }
-
         return $this->render('author/new.html.twig', [
             'author' => $author,
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="author_edit", methods={"GET","POST"})
-     *
-     * @param Request $request
-     * @param Author  $author
-     *
-     * @return Response
-     */
+    #[Route(path: '/{id}/edit', name: 'author_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Author $author): Response
     {
         $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
             return $this->redirectToRoute('author_index');
         }
-
         return $this->render('author/edit.html.twig', [
             'author' => $author,
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/{id}/delete", name="author_delete")
-     *
-     * @param Request $request
-     * @param Author $author
-     *
-     * @return Response
-     */
+    #[Route(path: '/{id}/delete', name: 'author_delete')]
     public function delete(Request $request, Author $author): Response
     {
         $form = $this->createFormBuilder()
@@ -111,7 +73,6 @@ class AuthorController extends AbstractController
             ->getForm()
         ;
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->remove($author);
             $this->manager->flush();
@@ -119,21 +80,13 @@ class AuthorController extends AbstractController
 
             return $this->redirectToRoute('author_index');
         }
-
         return $this->render('author/delete.html.twig', [
             'form' => $form->createView(),
             'author' => $author,
         ]);
     }
 
-    /**
-     * @Route("/merge", name="author_merge", methods={"GET","POST"})
-     *
-     * @param Request     $request
-     * @param AuthorMerge $mergeService
-     *
-     * @return Response
-     */
+    #[Route(path: '/merge', name: 'author_merge', methods: ['GET', 'POST'])]
     public function merge(Request $request, AuthorMerge $mergeService): Response
     {
         $data = [
@@ -161,7 +114,6 @@ class AuthorController extends AbstractController
             ->getForm()
         ;
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $authors = $data['authors'];
@@ -173,7 +125,6 @@ class AuthorController extends AbstractController
 
             return $this->redirectToRoute('author_index');
         }
-
         return $this->render('author/merge.html.twig', [
             'form' => $form->createView(),
         ]);
