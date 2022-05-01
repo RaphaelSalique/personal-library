@@ -44,10 +44,11 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
+        "andres-montanez/magallanes": "^5.0",
         "doctrine/data-fixtures": "^1.5",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "ergebnis/composer-normalize": "^2.2",
         "liip/test-fixtures-bundle": "^2.0.1",
-        "localheinz/composer-normalize": "^2.2",
         "phpmd/phpmd": "^2.8",
         "phpro/grumphp": "^1.3.1",
         "phpstan/extension-installer": "^1.0",
@@ -96,7 +97,8 @@
             "phpstan/extension-installer": true,
             "localheinz/composer-normalize": true,
             "phpro/grumphp": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "ergebnis/composer-normalize": true
         },
         "preferred-install": {
             "*": "dist"
