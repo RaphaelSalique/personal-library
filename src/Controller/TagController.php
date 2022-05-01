@@ -18,6 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TagController extends AbstractController
 {
+    private EntityManagerInterface $manager;
+
+    /**
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="tag_index", methods={"GET"})
      *
@@ -46,9 +56,8 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($tag);
-            $entityManager->flush();
+            $this->manager->persist($tag);
+            $this->manager->flush();
 
             return $this->redirectToRoute('tag_index');
         }
@@ -87,13 +96,12 @@ class TagController extends AbstractController
     /**
      * @Route("/{id}/delete", name="tag_delete")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
-     * @param Tag                    $tag
+     * @param Request $request
+     * @param Tag $tag
      *
      * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $manager, Tag $tag): Response
+    public function delete(Request $request, Tag $tag): Response
     {
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class, ['label' => 'Supprimer', 'attr' => ['class' => 'is-danger']])
@@ -102,8 +110,8 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->remove($tag);
-            $manager->flush();
+            $this->manager->remove($tag);
+            $this->manager->flush();
             $this->addFlash('danger', 'Le tag "' . $tag->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('tag_index');
