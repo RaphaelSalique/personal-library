@@ -7,81 +7,46 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TagRepository;
 
-/**
- * Class Tag.
- *
- * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
- */
+#[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     *
-     * @var int
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="tags")
-     *
-     * @var Tag|null
-     */
+    #[ORM\ManyToOne(targetEntity: Tag::class, inversedBy: 'tags')]
     private ?Tag $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tag", mappedBy="parent")
-     *
-     * @var Collection&iterable<Tag>
-     */
-    private $tags;
+    /** @var Collection<Tag> */
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Tag::class)]
+    private Collection $tags;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="tags")
-     *
-     * @var Collection&iterable<Book>
-     */
-    private $books;
+    /** @var Collection<Book> */
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'tags')]
+    private Collection $books;
 
-    /**
-     * Tag constructor.
-     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->books = new ArrayCollection();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -89,19 +54,11 @@ class Tag
         return $this;
     }
 
-    /**
-     * @return Tag|null
-     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
-    /**
-     * @param Tag|null $parent
-     *
-     * @return $this
-     */
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
@@ -109,19 +66,11 @@ class Tag
         return $this;
     }
 
-    /**
-     * @return Collection<Tag, Tag>
-     */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    /**
-     * @param Tag $tag
-     *
-     * @return $this
-     */
     public function addTag(self $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -132,11 +81,6 @@ class Tag
         return $this;
     }
 
-    /**
-     * @param Tag $tag
-     *
-     * @return $this
-     */
     public function removeTag(self $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -150,19 +94,11 @@ class Tag
         return $this;
     }
 
-    /**
-     * @return Collection<Tag, Book>
-     */
     public function getBooks(): Collection
     {
         return $this->books;
     }
 
-    /**
-     * @param Book $book
-     *
-     * @return $this
-     */
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
@@ -173,11 +109,6 @@ class Tag
         return $this;
     }
 
-    /**
-     * @param Book $book
-     *
-     * @return $this
-     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {
@@ -188,9 +119,6 @@ class Tag
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->name;
