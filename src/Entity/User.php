@@ -5,12 +5,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
@@ -20,21 +23,18 @@ class User implements UserInterface
      * @var int
      */
     private int $id;
-
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @var string
      */
     private string $email;
-
     /**
      * @ORM\Column(type="json")
      *
      * @var array
      */
     private array $roles = [];
-
     /**
      * @var string The hashed password
      *
@@ -49,7 +49,6 @@ class User implements UserInterface
     {
         return $this->id;
     }
-
     /**
      * @return string|null
      */
@@ -57,7 +56,6 @@ class User implements UserInterface
     {
         return $this->email;
     }
-
     /**
      * @param string $email
      *
@@ -69,7 +67,6 @@ class User implements UserInterface
 
         return $this;
     }
-
     /**
      * A visual identifier that represents this user.
      *
@@ -81,7 +78,6 @@ class User implements UserInterface
     {
         return (string) $this->email;
     }
-
     /**
      * @see UserInterface
      *
@@ -89,13 +85,12 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $rolesToGet = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $rolesToGet[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array_unique($rolesToGet);
     }
-
     /**
      * @param array $roles
      *
@@ -107,7 +102,6 @@ class User implements UserInterface
 
         return $this;
     }
-
     /**
      * @see UserInterface
      *
@@ -117,7 +111,6 @@ class User implements UserInterface
     {
         return (string) $this->password;
     }
-
     /**
      * @param string $password
      *
@@ -129,7 +122,6 @@ class User implements UserInterface
 
         return $this;
     }
-
     /**
      * @see UserInterface
      */
@@ -137,7 +129,6 @@ class User implements UserInterface
     {
         return '';
     }
-
     /**
      * @see UserInterface
      */
@@ -146,7 +137,6 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
     /**
      * Returns the identifier for this user (e.g. its username or email address).
      */
