@@ -147,9 +147,6 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
-    "friendsoftwig/twigcs": {
-        "version": "v3.2.2"
-    },
     "gitonomy/gitlib": {
         "version": "v1.2.0"
     },
@@ -326,6 +323,9 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "rector/rector": {
+        "version": "0.12.22"
     },
     "roave/security-advisories": {
         "version": "dev-latest"
@@ -626,9 +626,6 @@
     "symfony/polyfill-php72": {
         "version": "v1.13.1"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.13.1"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
     },
@@ -677,9 +674,6 @@
         "version": "v4.4.2"
     },
     "symfony/security-csrf": {
-        "version": "v4.4.2"
-    },
-    "symfony/security-guard": {
         "version": "v4.4.2"
     },
     "symfony/security-http": {

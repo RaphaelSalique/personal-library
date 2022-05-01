@@ -12,6 +12,7 @@ use App\Form\BookType;
 use App\Repository\BookRepository;
 use App\Services\GetBookDetail;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,36 +25,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     private string $twigFilterView = 'book/filter.html.twig';
-    private EntityManagerInterface $manager;
 
-    /**
-     * @param EntityManagerInterface $manager
-     */
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(private readonly EntityManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
-    /**
-     * @Route("/", name="book_index")
-     *
-     * @param BookRepository $bookRepository
-     *
-     * @return Response
-     */
+    #[Route(path: '/', name: 'book_index')]
     public function index(BookRepository $bookRepository): Response
     {
         return $this->render('book/index.html.twig', ['books' => $bookRepository->listAllBooksWithRelations()]);
     }
 
-    /**
-     * @Route("/books/editor/{editor}", name="book_editor")
-     *
-     * @param BookRepository $bookRepository
-     * @param Editor         $editor
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/editor/{editor}', name: 'book_editor')]
     public function editor(BookRepository $bookRepository, Editor $editor): Response
     {
         return $this->render($this->twigFilterView, [
@@ -64,14 +47,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/books/tag/{tag}", name="book_tag")
-     *
-     * @param BookRepository $bookRepository
-     * @param Tag            $tag
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/tag/{tag}', name: 'book_tag')]
     public function tag(BookRepository $bookRepository, Tag $tag): Response
     {
         return $this->render($this->twigFilterView, [
@@ -82,14 +58,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/books/author/{author}", name="book_author")
-     *
-     * @param BookRepository $bookRepository
-     * @param Author         $author
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/author/{author}', name: 'book_author')]
     public function author(BookRepository $bookRepository, Author $author): Response
     {
         return $this->render($this->twigFilterView, [
@@ -100,14 +69,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/books/add_from_barcode", name="book_add_from_barcode")
-     *
-     * @param GetBookDetail $service
-     * @param Request $request
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/add_from_barcode', name: 'book_add_from_barcode')]
     public function addFromBarcode(GetBookDetail $service, Request $request): Response
     {
         $data = [
@@ -118,16 +80,15 @@ class BookController extends AbstractController
             ->add('save', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $dataForm = $form->getData();
             try {
                 $book = $service->isbnToBook($dataForm['isbn']);
                 $this->manager->persist($book);
                 $this->manager->flush();
-                $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
+                $this->addFlash('success', "Le livre \"{$book->getTitle()}\" a été créé");
                 $url = $this->generateUrl('book_add_from_barcode');
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 $this->addFlash('danger', $exception->getMessage());
                 $this->addFlash('danger', $exception->getFile() . ' ' . $exception->getLine());
                 $this->addFlash('danger', $exception->getTraceAsString());
@@ -136,75 +97,50 @@ class BookController extends AbstractController
 
             return $this->redirect($url);
         }
-
         return $this->render('book/add_from_barcode.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/books/add", name="book_add")
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/add', name: 'book_add')]
     public function add(Request $request): Response
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($book);
             $this->manager->flush();
-            $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
+            $this->addFlash('success', "Le livre \"{$book->getTitle()}\" a été créé");
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);
         }
-
         return $this->render('book/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    /**
-     * @Route("/books/edit/{book}", name="book_edit")
-     *
-     * @param Request $request
-     * @param Book $book
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/edit/{book}', name: 'book_edit')]
     public function edit(Request $request, Book $book): Response
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->persist($book);
             $this->manager->flush();
-            $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été mis à jour');
+            $this->addFlash('success', "Le livre \"{$book->getTitle()}\" a été mis à jour");
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);
         }
-
         return $this->render('book/edit.html.twig', [
             'form' => $form->createView(),
             'book' => $book,
         ]);
     }
 
-    /**
-     * @Route("/books/delete/{book}", name="book_delete")
-     *
-     * @param Request $request
-     * @param Book $book
-     *
-     * @return Response
-     */
+    #[Route(path: '/books/delete/{book}', name: 'book_delete')]
     public function delete(Request $request, Book $book): Response
     {
         $form = $this->createFormBuilder()
@@ -212,45 +148,30 @@ class BookController extends AbstractController
             ->getForm()
         ;
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->remove($book);
             $this->manager->flush();
-            $this->addFlash('danger', 'Le livre "' . $book->getTitle() . '" a été supprimé');
+            $this->addFlash('danger', "Le livre \"{$book->getTitle()}\" a été supprimé");
             $url = $this->getUrlProvenance($request);
 
             return $this->redirect($url);
         }
-
         return $this->render('book/delete.html.twig', [
             'form' => $form->createView(),
             'book' => $book,
         ]);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return string
-     */
     private function getUrlProvenance(Request $request): string
     {
         $filterName = $request->get('filter');
         $filterId = $request->get('id_filter');
-        switch ($filterName) {
-            case 'éditeur':
-                $url = $this->generateUrl('book_editor', ['editor' => $filterId]);
-                break;
-            case 'auteur':
-                $url = $this->generateUrl('book_author', ['author' => $filterId]);
-                break;
-            case 'tag':
-                $url = $this->generateUrl('book_tag', ['tag' => $filterId]);
-                break;
-            default:
-                $url = $this->generateUrl('book_index');
-        }
 
-        return $url;
+        return match ($filterName) {
+            'éditeur' => $this->generateUrl('book_editor', ['editor' => $filterId]),
+            'auteur' => $this->generateUrl('book_author', ['author' => $filterId]),
+            'tag' => $this->generateUrl('book_tag', ['tag' => $filterId]),
+            default => $this->generateUrl('book_index'),
+        };
     }
 }

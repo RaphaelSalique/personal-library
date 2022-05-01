@@ -19,15 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BatchController extends AbstractController
 {
-    /**
-     * @Route("/batch", name="batch")
-     *
-     * @param Request     $request
-     *
-     * @param BatchUpdate $batchUpdate
-     *
-     * @return Response
-     */
+    #[Route(path: '/batch', name: 'batch')]
     public function index(Request $request, BatchUpdate $batchUpdate): Response
     {
         $data = [
@@ -35,7 +27,6 @@ class BatchController extends AbstractController
             'authors' => [],
             'tags' => [],
         ];
-
         $form = $this->createFormBuilder($data)
             ->add('books', EntityType::class, [
                 'class' => Book::class,
@@ -59,16 +50,13 @@ class BatchController extends AbstractController
                 'label' => 'Envoyer',
             ])
             ->getForm();
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $batchUpdate->batchUpdate($form->getData());
             $this->addFlash('success', 'Les livres ont été mis à jour');
 
             return $this->redirectToRoute('batch');
         }
-
         return $this->render('batch/index.html.twig', [
             'form' => $form->createView(),
         ]);
