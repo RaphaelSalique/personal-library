@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class CreateUserCommand
@@ -19,24 +19,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class CreateUserCommand extends Command
 {
     /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
-    /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-
-    /**
      * CreateUserCommand constructor.
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param EntityManagerInterface       $entityManager
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private UserPasswordHasherInterface $passwordHasher,
+        private EntityManagerInterface $entityManager
+    ) {
         parent::__construct();
-        $this->passwordEncoder = $passwordEncoder;
-        $this->entityManager = $entityManager;
     }
 
     protected static $defaultName = 'app:create-user';
@@ -73,7 +62,7 @@ class CreateUserCommand extends Command
         $style->note(sprintf('Création de l\'utilisateur %s avec le mot de passe %s', $email, $password));
         $user = new User();
         $user->setEmail($email);
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
+        $user->setPassword($this->passwordHasher->hashPassword($user, $password));
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 

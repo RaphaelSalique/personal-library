@@ -15,7 +15,6 @@ grumphp:
             standard: PSR12
             whitelist_patterns:
                 - /^src/
-        phplint: ~
         phpmd:
             whitelist_patterns:
                 - /src\/Command\/(.*)/
