@@ -23,6 +23,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BookController extends AbstractController
 {
+    private string $twigFilterView = 'book/filter.html.twig';
+    private EntityManagerInterface $manager;
+
+    /**
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="book_index")
      *
@@ -45,7 +56,7 @@ class BookController extends AbstractController
      */
     public function editor(BookRepository $bookRepository, Editor $editor): Response
     {
-        return $this->render('book/filter.html.twig', [
+        return $this->render($this->twigFilterView, [
             'books' => $bookRepository->listBooksFromEditor($editor),
             'filterBook' => 'éditeur',
             'filterName' => $editor->getName(),
@@ -63,7 +74,7 @@ class BookController extends AbstractController
      */
     public function tag(BookRepository $bookRepository, Tag $tag): Response
     {
-        return $this->render('book/filter.html.twig', [
+        return $this->render($this->twigFilterView, [
             'books' => $bookRepository->listBooksFromTag($tag),
             'filterBook' => 'tag',
             'filterName' => $tag->getName(),
@@ -81,7 +92,7 @@ class BookController extends AbstractController
      */
     public function author(BookRepository $bookRepository, Author $author): Response
     {
-        return $this->render('book/filter.html.twig', [
+        return $this->render($this->twigFilterView, [
             'books' => $bookRepository->listBooksFromAuthor($author),
             'filterBook' => 'auteur',
             'filterName' => $author->getName(),
@@ -92,13 +103,12 @@ class BookController extends AbstractController
     /**
      * @Route("/books/add_from_barcode", name="book_add_from_barcode")
      *
-     * @param GetBookDetail          $service
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
+     * @param GetBookDetail $service
+     * @param Request $request
      *
      * @return Response
      */
-    public function addFromBarcode(GetBookDetail $service, Request $request, EntityManagerInterface $manager): Response
+    public function addFromBarcode(GetBookDetail $service, Request $request): Response
     {
         $data = [
             'isbn' => null,
@@ -113,8 +123,8 @@ class BookController extends AbstractController
             $dataForm = $form->getData();
             try {
                 $book = $service->isbnToBook($dataForm['isbn']);
-                $manager->persist($book);
-                $manager->flush();
+                $this->manager->persist($book);
+                $this->manager->flush();
                 $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
                 $url = $this->generateUrl('book_add_from_barcode');
             } catch (\Exception $exception) {
@@ -135,20 +145,19 @@ class BookController extends AbstractController
     /**
      * @Route("/books/add", name="book_add")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
+     * @param Request $request
      *
      * @return Response
      */
-    public function add(Request $request, EntityManagerInterface $manager): Response
+    public function add(Request $request): Response
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($book);
-            $manager->flush();
+            $this->manager->persist($book);
+            $this->manager->flush();
             $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été créé');
             $url = $this->getUrlProvenance($request);
 
@@ -163,20 +172,19 @@ class BookController extends AbstractController
     /**
      * @Route("/books/edit/{book}", name="book_edit")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
-     * @param Book                   $book
+     * @param Request $request
+     * @param Book $book
      *
      * @return Response
      */
-    public function edit(Request $request, EntityManagerInterface $manager, Book $book): Response
+    public function edit(Request $request, Book $book): Response
     {
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($book);
-            $manager->flush();
+            $this->manager->persist($book);
+            $this->manager->flush();
             $this->addFlash('success', 'Le livre "' . $book->getTitle() . '" a été mis à jour');
             $url = $this->getUrlProvenance($request);
 
@@ -192,13 +200,12 @@ class BookController extends AbstractController
     /**
      * @Route("/books/delete/{book}", name="book_delete")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
-     * @param Book                   $book
+     * @param Request $request
+     * @param Book $book
      *
      * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $manager, Book $book): Response
+    public function delete(Request $request, Book $book): Response
     {
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class)
@@ -207,8 +214,8 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->remove($book);
-            $manager->flush();
+            $this->manager->remove($book);
+            $this->manager->flush();
             $this->addFlash('danger', 'Le livre "' . $book->getTitle() . '" a été supprimé');
             $url = $this->getUrlProvenance($request);
 

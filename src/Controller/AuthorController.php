@@ -21,6 +21,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AuthorController extends AbstractController
 {
+    private EntityManagerInterface $manager;
+
+    /**
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="author_index", methods={"GET"})
      *
@@ -49,9 +59,8 @@ class AuthorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($author);
-            $entityManager->flush();
+            $this->manager->persist($author);
+            $this->manager->flush();
 
             return $this->redirectToRoute('author_index');
         }
@@ -76,7 +85,7 @@ class AuthorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->manager->flush();
 
             return $this->redirectToRoute('author_index');
         }
@@ -90,13 +99,12 @@ class AuthorController extends AbstractController
     /**
      * @Route("/{id}/delete", name="author_delete")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
-     * @param Author                 $author
+     * @param Request $request
+     * @param Author $author
      *
      * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $manager, Author $author): Response
+    public function delete(Request $request, Author $author): Response
     {
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class, ['label' => 'Supprimer', 'attr' => ['class' => 'is-danger']])
@@ -105,8 +113,8 @@ class AuthorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->remove($author);
-            $manager->flush();
+            $this->manager->remove($author);
+            $this->manager->flush();
             $this->addFlash('danger', 'L\'auteur "' . $author->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('author_index');

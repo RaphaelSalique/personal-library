@@ -22,6 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EditorController extends AbstractController
 {
+    private EntityManagerInterface $manager;
+
+    /**
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="editor_index", methods={"GET"})
      *
@@ -50,9 +60,8 @@ class EditorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($editor);
-            $entityManager->flush();
+            $this->manager->persist($editor);
+            $this->manager->flush();
 
             return $this->redirectToRoute('editor_index');
         }
@@ -91,13 +100,12 @@ class EditorController extends AbstractController
     /**
      * @Route("/{id}/delete", name="editor_delete")
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $manager
-     * @param Editor                 $editor
+     * @param Request $request
+     * @param Editor $editor
      *
      * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $manager, Editor $editor): Response
+    public function delete(Request $request, Editor $editor): Response
     {
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class, ['label' => 'Supprimer', 'attr' => ['class' => 'is-danger']])
@@ -106,8 +114,8 @@ class EditorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->remove($editor);
-            $manager->flush();
+            $this->manager->remove($editor);
+            $this->manager->flush();
             $this->addFlash('danger', 'L\'éditeur "' . $editor->getName() . '" a été supprimé');
 
             return $this->redirectToRoute('editor_index');
