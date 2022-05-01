@@ -9,83 +9,44 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use Google\Service\ServiceControl\Auth;
 
-/**
- * Class Book.
- *
- * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
- */
+#[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     *
-     * @var int
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Editor", inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @var Editor
-     */
+    #[ORM\ManyToOne(targetEntity: Editor::class, inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
     private Editor $editor;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $title;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     *
-     * @var string|null
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $abstract;
 
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTimeInterface
-     */
-    private $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    private DateTimeInterface $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTimeInterface
-     */
+    #[ORM\Column(type: 'datetime')]
     private DateTimeInterface $publishedAt;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $isbn;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
-     *
-     * @var Collection&iterable<Author>
-     */
-    private $authors;
+    /** @var Collection<Author> */
+    #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
+    private Collection $authors;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="books")
-     *
-     * @var Collection&iterable<Tag>
-     */
-    private $tags;
+    /** @var Collection<Tag> */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
+    private Collection $tags;
 
-    /**
-     * Book constructor.
-     */
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -93,27 +54,16 @@ class Book
         $this->createdAt = new DateTime();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Editor|null
-     */
     public function getEditor(): ?Editor
     {
         return $this->editor;
     }
 
-    /**
-     * @param Editor $editor
-     *
-     * @return $this
-     */
     public function setEditor(Editor $editor): self
     {
         $this->editor = $editor;
@@ -121,19 +71,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     *
-     * @return $this
-     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -141,19 +83,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAbstract(): ?string
     {
         return $this->abstract;
     }
 
-    /**
-     * @param string|null $abstract
-     *
-     * @return $this
-     */
     public function setAbstract(?string $abstract): self
     {
         $this->abstract = $abstract;
@@ -161,19 +95,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTimeInterface $createdAt
-     *
-     * @return $this
-     */
     public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -181,19 +107,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getPublishedAt(): ?DateTimeInterface
     {
         return $this->publishedAt;
     }
 
-    /**
-     * @param DateTimeInterface $publishedAt
-     *
-     * @return $this
-     */
     public function setPublishedAt(DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
@@ -201,19 +119,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIsbn(): ?string
     {
         return $this->isbn;
     }
 
-    /**
-     * @param string $isbn
-     *
-     * @return $this
-     */
     public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
@@ -221,19 +131,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection<Book, Author>
-     */
     public function getAuthors(): Collection
     {
         return $this->authors;
     }
 
-    /**
-     * @param Author $author
-     *
-     * @return $this
-     */
     public function addAuthor(Author $author): self
     {
         if (!$this->authors->contains($author)) {
@@ -243,11 +145,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @param Author $author
-     *
-     * @return $this
-     */
     public function removeAuthor(Author $author): self
     {
         if ($this->authors->contains($author)) {
@@ -257,19 +154,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection<Book, Tag>
-     */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    /**
-     * @param Tag $tag
-     *
-     * @return $this
-     */
     public function addTag(Tag $tag): self
     {
         if (!$this->tags->contains($tag)) {
@@ -279,11 +168,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @param Tag $tag
-     *
-     * @return $this
-     */
     public function removeTag(Tag $tag): self
     {
         if ($this->tags->contains($tag)) {
@@ -293,17 +177,11 @@ class Book
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
-        return (string) $this->title;
+        return $this->title;
     }
 
-    /**
-     * @return self
-     */
     public function removeAllAuthors(): self
     {
         foreach ($this->authors as $author) {
@@ -313,9 +191,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @return self
-     */
     public function removeAllTags(): self
     {
         foreach ($this->tags as $tag) {
