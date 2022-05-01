@@ -15,6 +15,7 @@ magephp:
             hosts:
                 - salique
             pre-deploy:
+                - sudo update-alternatives --set php /usr/bin/php8.1
                 - git/update
                 - composer/install
                 - composer/dump-autoload
@@ -26,3 +27,4 @@ magephp:
             post-deploy:
                 - yarn install
                 - yarn run build
+                - sudo update-alternatives --set php /usr/bin/php7.4
