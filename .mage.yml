@@ -15,6 +15,7 @@ magephp:
             hosts:
                 - salique
             pre-deploy:
+                - exec: { cmd: 'sudo update-alternatives --set php /usr/bin/php8.1', desc: 'Switch to PHP 8.1' }
                 - git/update
                 - composer/install
                 - composer/dump-autoload
@@ -26,3 +27,4 @@ magephp:
             post-deploy:
                 - yarn install
                 - yarn run build
+                - exec: { cmd: 'sudo update-alternatives --set php /usr/bin/php7.4', desc: 'Switch to PHP 7.4' }
