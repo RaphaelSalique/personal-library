@@ -11,8 +11,8 @@ export default class Pagination {
     demasqueSurIntervalle(min)
     {
         const max = min + this.nbDisplayed
-        const trs = this.tbody.children
-        for (let i = 0; i < this.total; i++) {
+        const trs = [...this.tbody.children].filter(child => !child.classList.contains('not-selected'))
+        for (let i = 0; i < trs.length; i++) {
             trs[i].classList.add('is-hidden')
             if (i >= min && i < max) {
                 trs[i].classList.remove('is-hidden')
@@ -22,12 +22,15 @@ export default class Pagination {
     }
     demasqueTous()
     {
-        let total = this.tbody.childElementCount
-        const trs = this.tbody.children
+        let total = [...this.tbody.children].filter(child => !child.classList.contains('not-selected')).length
+        const trs = [...this.tbody.children].filter(child => !child.classList.contains('not-selected'))
         for (let i = 0; i < total; i++) {
             trs[i].classList.remove('is-hidden')
         }
-        this.tableau.removeChild(this.tfoot)
+        if (this.tfoot) {
+            this.tableau.removeChild(this.tfoot)
+            this.tfoot = null
+        }
 
     }
     marqueCurrent(current)
@@ -40,8 +43,25 @@ export default class Pagination {
             }
         })
     }
-    init()
+    init(searchValue = '')
     {
+        const haveSearch = searchValue.length > 0;
+        this.total = 0;
+        [...this.tbody.children].forEach(child => {
+            let text = child.innerText.toLowerCase()
+            child.classList.add('not-selected')
+            child.classList.remove('is-hidden')
+            if (text.includes(searchValue) || !haveSearch) {
+                child.classList.remove('not-selected')
+                this.total++
+            }
+        })
+        this.tableau.querySelector('#total').innerText = this.total
+        if (this.tfoot) {
+            this.tableau.removeChild(this.tfoot)
+            this.tfoot = null
+        }
+
         if (this.total > this.nbDisplayed) {
             this.demasqueSurIntervalle(0)
             this.tfoot = document.createElement('tfoot')

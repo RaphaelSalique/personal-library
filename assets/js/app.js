@@ -1,10 +1,3 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
-
 import '../css/app.scss'
 
 import 'bulma/css/bulma.css'
@@ -16,20 +9,27 @@ import Pagination from './pagination'
 
 const tablesort = require('tablesort')
 const tableElement = document.querySelector('table')
+const searchfield = document.querySelector('#searchfield')
 if (tableElement !== null) {
-    const nbBookDisplayed = 20
+    const nbBookDisplayed = 10
 
     tablesort(tableElement)
 
     const paginator = new Pagination(tableElement, nbBookDisplayed)
     paginator.init()
 
+    searchfield.addEventListener('input', () => {
+        const searchValue = searchfield.value.toLowerCase();
+        paginator.init(searchValue)
+    })
+
     tableElement.addEventListener('beforeSort', () => {
         paginator.demasqueTous()
     })
 
     tableElement.addEventListener('afterSort', () => {
-        paginator.init()
+        const searchValue = searchfield.value.toLowerCase();
+        paginator.init(searchValue)
     })
 }
 
@@ -66,9 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if there are any navbar burgers
     if ($navbarBurgers.length > 0) {
-
         // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
+        $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
 
                 // Get the target from the "data-target" attribute
