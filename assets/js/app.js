@@ -4,6 +4,15 @@ import 'bulma/css/bulma.css'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 
+let editor = document.querySelector('#book_abstract')
+if (editor) {
+    ClassicEditor
+        .create(document.querySelector('#book_abstract'))
+        .catch(error => {
+            console.error(error);
+        });
+}
+
 // Pagination et tri du tableau
 import Pagination from './pagination'
 
