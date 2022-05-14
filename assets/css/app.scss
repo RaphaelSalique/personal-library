@@ -1,5 +1,9 @@
 // Styles table sort
 
+.not-selected {
+    display: none;
+}
+
 th[role=columnheader] {
     &:not([data-sort-method="none"]) {
         cursor: pointer;
