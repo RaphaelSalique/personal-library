@@ -198,6 +198,9 @@
     "localheinz/diff": {
         "version": "1.0.1"
     },
+    "masterminds/html5": {
+        "version": "2.7.5"
+    },
     "monolog/monolog": {
         "version": "1.25.3"
     },
@@ -631,9 +634,6 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
-    },
-    "symfony/polyfill-php81": {
-        "version": "v1.23.0"
     },
     "symfony/process": {
         "version": "v4.4.2"
