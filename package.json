@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@ericblade/quagga2": "^1.4.2",
-        "@fortawesome/fontawesome-free": "^5.15.4",
+        "@fortawesome/fontawesome-free": "^6.1.2",
         "bulma": "^0.9.3",
         "choices.js": "^9.0.1",
         "tablesort": "^5.1.0"
