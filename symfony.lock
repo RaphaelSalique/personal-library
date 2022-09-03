@@ -256,9 +256,6 @@
     "phpseclib/phpseclib": {
         "version": "2.0.23"
     },
-    "phpspec/prophecy": {
-        "version": "1.13.0"
-    },
     "phpstan/extension-installer": {
         "version": "1.0.3"
     },
