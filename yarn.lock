@@ -795,9 +795,9 @@
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
 
-"@ericblade/quagga2@^1.4.2":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@ericblade/quagga2/-/quagga2-1.7.0.tgz#64551ad1aaef69214a40b090097beb0a4f66fd67"
+"@ericblade/quagga2@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@ericblade/quagga2/-/quagga2-1.7.1.tgz#5c1fd932ad999c2be31f6fde8c1c304f65024f2f"
   dependencies:
     "@babel/polyfill" "^7.12.1"
     get-pixels "^3.3.3"
