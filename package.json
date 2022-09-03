@@ -2,7 +2,7 @@
     "devDependencies": {
         "@symfony/webpack-encore": "^1.6.1",
         "core-js": "^3.18.0",
-        "node-sass": "^6.0.1",
+        "node-sass": "^7.0.1",
         "regenerator-runtime": "^0.13.9",
         "sass-loader": "^12.1.0",
         "webpack-notifier": "^1.13.0"
@@ -18,8 +18,8 @@
     "dependencies": {
         "@ericblade/quagga2": "^1.4.2",
         "@fortawesome/fontawesome-free": "^5.15.4",
-        "bulma": "^0.9.3",
-        "choices.js": "^9.0.1",
+        "bulma": "^0.9.4",
+        "choices.js": "^10.1.0",
         "tablesort": "^5.1.0"
     }
 }
