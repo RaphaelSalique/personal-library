@@ -16,7 +16,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@ericblade/quagga2": "^1.4.2",
+        "@ericblade/quagga2": "^1.7.6",
         "@fortawesome/fontawesome-free": "^5.15.4",
         "bulma": "^0.9.3",
         "choices.js": "^9.0.1",
