@@ -19,12 +19,17 @@ import Pagination from './pagination'
 const tablesort = require('tablesort')
 const tableElement = document.querySelector('table')
 const searchfield = document.querySelector('#searchfield')
+const pageInitElement = document.querySelector('#pageInit')
 if (tableElement !== null) {
-    const nbBookDisplayed = 10
+    const nbBookDisplayed = 30
+    let pageInit = 1
+    if (pageInitElement !== null) {
+        pageInit = parseInt(pageInitElement.dataset.page)
+    }
 
     tablesort(tableElement)
 
-    const paginator = new Pagination(tableElement, nbBookDisplayed)
+    const paginator = new Pagination(tableElement, nbBookDisplayed, pageInit)
     paginator.init()
 
     searchfield.addEventListener('input', () => {
