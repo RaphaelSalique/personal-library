@@ -30,10 +30,13 @@ class BookController extends AbstractController
     {
     }
 
-    #[Route(path: '/', name: 'book_index')]
-    public function index(BookRepository $bookRepository): Response
+    #[Route(path: '/{page}', name: 'book_index')]
+    public function index(BookRepository $bookRepository, int $page = 1): Response
     {
-        return $this->render('book/index.html.twig', ['books' => $bookRepository->listAllBooksWithRelations()]);
+        return $this->render('book/index.html.twig', [
+            'books' => $bookRepository->listAllBooksWithRelations(),
+            'page' => $page
+        ]);
     }
 
     #[Route(path: '/books/editor/{editor}', name: 'book_editor')]

@@ -1,8 +1,9 @@
 export default class Pagination {
-    constructor(tableau, nbDisplayed)
+    constructor(tableau, nbDisplayed, pageInit)
     {
         this.tableau = tableau
         this.nbDisplayed = nbDisplayed
+        this.pageInit = pageInit
         this.tbody = this.tableau.querySelector('tbody')
         this.total = this.tbody.childElementCount
         this.ul = null
@@ -67,7 +68,7 @@ export default class Pagination {
             this.tfoot = document.createElement('tfoot')
             const tr = document.createElement('tr')
             const th = document.createElement('th')
-            th.setAttribute('colspan', 6)
+            th.setAttribute('colspan', 8)
             const nbPages = Math.ceil(this.total / this.nbDisplayed)
             const nav = document.createElement('nav')
             nav.classList.add('pagination')
@@ -94,6 +95,9 @@ export default class Pagination {
                 })
                 li.appendChild(a)
                 this.ul.appendChild(li)
+                if (this.pageInit === (i + 1)) {
+                    a.click()
+                }
             }
             nav.appendChild(this.ul)
             th.appendChild(nav)
