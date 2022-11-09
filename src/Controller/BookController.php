@@ -36,15 +36,6 @@ class BookController extends AbstractController
         return $this->redirectToRoute('login');
     }
 
-    #[Route(path: '/books/{page}', name: 'book_index')]
-    public function index(BookRepository $bookRepository, int $page = 1): Response
-    {
-        return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->listAllBooksWithRelations(),
-            'page' => $page
-        ]);
-    }
-
     #[Route(path: '/books/editor/{editor}', name: 'book_editor')]
     public function editor(BookRepository $bookRepository, Editor $editor): Response
     {
@@ -168,6 +159,15 @@ class BookController extends AbstractController
         return $this->render('book/delete.html.twig', [
             'form' => $form->createView(),
             'book' => $book,
+        ]);
+    }
+
+    #[Route(path: '/books/{page}', name: 'book_index')]
+    public function index(BookRepository $bookRepository, int $page = 1): Response
+    {
+        return $this->render('book/index.html.twig', [
+            'books' => $bookRepository->listAllBooksWithRelations(),
+            'page' => $page
         ]);
     }
 
