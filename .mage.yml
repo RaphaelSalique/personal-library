@@ -26,3 +26,4 @@ magephp:
             on-release:
             post-release:
             post-deploy:
+                - exec: { cmd: 'sudo systemctl reload php8.1-fpm.service', desc: 'Reload PHP 8.1 FPM' }
