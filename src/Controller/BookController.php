@@ -30,7 +30,13 @@ class BookController extends AbstractController
     {
     }
 
-    #[Route(path: '/{page}', name: 'book_index')]
+    #[Route(path: '/', name: 'default')]
+    public function default(): Response
+    {
+        return $this->redirectToRoute('login');
+    }
+
+    #[Route(path: '/books/{page}', name: 'book_index')]
     public function index(BookRepository $bookRepository, int $page = 1): Response
     {
         return $this->render('book/index.html.twig', [
