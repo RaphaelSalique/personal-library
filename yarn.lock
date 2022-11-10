@@ -6670,7 +6670,7 @@ fsevents@~2.3.2:
     core-js: ^3.18.0
     node-sass: ^6.0.1
     regenerator-runtime: ^0.13.9
-    sass-loader: ^12.1.0
+    sass-loader: ^13.2.0
     tablesort: ^5.1.0
     webpack-notifier: ^1.13.0
   languageName: unknown
@@ -6720,16 +6720,17 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^12.1.0":
-  version: 12.1.0
-  resolution: "sass-loader@npm:12.1.0"
+"sass-loader@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "sass-loader@npm:13.2.0"
   dependencies:
     klona: ^2.0.4
     neo-async: ^2.6.2
   peerDependencies:
     fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     sass: ^1.3.0
+    sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
     fibers:
@@ -6738,7 +6739,9 @@ fsevents@~2.3.2:
       optional: true
     sass:
       optional: true
-  checksum: 75f523e64ce00f495d0a510ecd9719f8ea3be128a295e0c9b8fb33029a355b7842729c0900b4f05605fa97d8dfc87a9a627ae2ec9ff1b39c21612cdb00a967f2
+    sass-embedded:
+      optional: true
+  checksum: 1a78bb421e50b12484f934d72a70105b963fcc6ba7e574fa13ffdb8deeb4496c6753cd7e67d358a71f734b8eb48e24ccb78183ecac0b732a58c3b8778e9a46e0
   languageName: node
   linkType: hard
 
