@@ -2654,10 +2654,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.18.0":
-  version: 3.18.0
-  resolution: "core-js@npm:3.18.0"
-  checksum: a37d8abbfd9fed31bd2f5ddc2ae780af462c27fde4fded94cfc1558b01941fe50f27453d93edad646562a43dc398498b202cf583d0822d0619c1da081a4cae4b
+"core-js@npm:^3.26.1":
+  version: 3.26.1
+  resolution: "core-js@npm:3.26.1"
+  checksum: cfcc46b6e82628090bc4c967d23a8dd2caed9d537b55d5b53890d6a51291d532b7bd0809e8463ac42028a80fc18af3788ef092881d6df944ce0e726330cd0d53
   languageName: node
   linkType: hard
 
@@ -6667,7 +6667,7 @@ fsevents@~2.3.2:
     "@symfony/webpack-encore": ^1.6.1
     bulma: ^0.9.3
     choices.js: ^9.0.1
-    core-js: ^3.18.0
+    core-js: ^3.26.1
     node-sass: ^6.0.1
     regenerator-runtime: ^0.13.9
     sass-loader: ^12.1.0
