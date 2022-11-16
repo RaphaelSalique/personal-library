@@ -1238,10 +1238,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-free@npm:^5.15.4":
-  version: 5.15.4
-  resolution: "@fortawesome/fontawesome-free@npm:5.15.4"
-  checksum: fbf0dc2198b81f9ee005163d455461965108d77ed27a07345945cf06a1eb82cd75e13642df93691ac894702bcbf81bb7c455a3f3a1cf6935ff51e8dde0af20e9
+"@fortawesome/fontawesome-free@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "@fortawesome/fontawesome-free@npm:6.2.1"
+  checksum: a03cea69765975d397b05f0fbde7d456454d57524ae91c4f1db12e43cad1a8abd68f656ea87971f3ddb086a2ed48885c2a323cd6d2cf272ea6d686aa48fb3849
   languageName: node
   linkType: hard
 
@@ -6663,7 +6663,7 @@ fsevents@~2.3.2:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@ericblade/quagga2": ^1.4.2
-    "@fortawesome/fontawesome-free": ^5.15.4
+    "@fortawesome/fontawesome-free": ^6.2.1
     "@symfony/webpack-encore": ^1.6.1
     bulma: ^0.9.3
     choices.js: ^9.0.1
