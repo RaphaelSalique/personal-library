@@ -2353,14 +2353,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"choices.js@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "choices.js@npm:9.0.1"
+"choices.js@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "choices.js@npm:10.2.0"
   dependencies:
-    deepmerge: ^4.2.0
-    fuse.js: ^3.4.5
-    redux: ^4.0.4
-  checksum: b5fe94e388aea5a85c4c764aaf0757a3ba92555a3200b8359854ec88b8afb50468d922ae1144d5cd71b4fa8ca02014d403cbf9c49a6eb31f83f5c46cfaa00213
+    deepmerge: ^4.2.2
+    fuse.js: ^6.6.2
+    redux: ^4.2.0
+  checksum: 7fed49973deb550b6afe9728f5978c46b1ce85b010f109b36641dcf295d912cf3613b53684eddb4ac3d3237de0b20e841895d845ac1fa89f46d034834004109d
   languageName: node
   linkType: hard
 
@@ -2971,7 +2971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.2.0":
+"deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: 85abf8e0045ee280996e7d2396979c877ef0741e413b716e42441110e0a83ac08098b2a49cea035510060bf667c0eae3189b2a52349f5fa4b000c211041637b1
@@ -3688,10 +3688,10 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^3.4.5":
-  version: 3.6.1
-  resolution: "fuse.js@npm:3.6.1"
-  checksum: 2eebc6f8f74abdbf65557f2fe81679ddfb20890482343892bfef43742ad3b7146cc9b89f5b12a40b35ecdfb1d8401848d567fc727261fa90fa87e899e8ec6112
+"fuse.js@npm:^6.6.2":
+  version: 6.6.2
+  resolution: "fuse.js@npm:6.6.2"
+  checksum: 012c0e3cfd0680e9dbac585e4f719d574af8020e1e61c7d1326a21722e10b3343df87950f1429b2cc1bcabcae22e13fcffbd353c918afe8725ccdbacb4a16b80
   languageName: node
   linkType: hard
 
@@ -6385,12 +6385,12 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.0.4":
-  version: 4.1.1
-  resolution: "redux@npm:4.1.1"
+"redux@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "redux@npm:4.2.0"
   dependencies:
     "@babel/runtime": ^7.9.2
-  checksum: 063e1d52588d62d438bb392975e57c0091c79f9abdbb8594c44c1680a73415280f6133c3d9cb3b116fe1ceb7e1aefb44775d6136b8bb6b9eb6a2c1a23e32a840
+  checksum: c84709d78a23ee0dd4b5e8295a5ded77de875c51ddc471a79ab8b73c3cff60ac259f8fd620b952c5ab062907d44dbcc94778d2539d4d572a55446d6a6f369c22
   languageName: node
   linkType: hard
 
@@ -6666,7 +6666,7 @@ fsevents@~2.3.2:
     "@fortawesome/fontawesome-free": ^5.15.4
     "@symfony/webpack-encore": ^1.6.1
     bulma: ^0.9.3
-    choices.js: ^9.0.1
+    choices.js: ^10.2.0
     core-js: ^3.18.0
     node-sass: ^6.0.1
     regenerator-runtime: ^0.13.9
