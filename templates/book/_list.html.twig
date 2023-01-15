@@ -58,6 +58,9 @@
             </td>
             <td>
                 <div class="buttons are-small">
+                    <a href="{{ path('book_view', {'book': book.id}) }}{% if filterBook is defined %}?filter={{ filterBook }}&id_filter={{ filterId }}{% endif %}" class="button is-primary" title="Editer">
+                        <i class="fas fa-eye"></i>
+                    </a>
                     <a href="{{ path('book_edit', {'book': book.id}) }}{% if filterBook is defined %}?filter={{ filterBook }}&id_filter={{ filterId }}{% endif %}" class="button is-primary" title="Editer">
                         <i class="fas fa-edit"></i>
                     </a>

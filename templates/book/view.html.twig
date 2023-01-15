@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+{% endblock %}
+
+{% block title %}
+Fiche du livre : "{{ book.title }}"
+{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-content">
+            <section class="section">
+                <h1 class="title">{{ book.title }}</h1>
+                <h2 class="subtitle">Par
+                    {% for author in book.authors %}{% if not(loop.first) and not(loop.last) %}, {% elseif not(loop.first) and loop.last %} et {% endif %}{{ author.firstName }} {{ author.name }}{% endfor %}
+                </h2>
+            </section>
+            <section class="section">
+                <p>
+                    {% for tag in book.tags %}
+                        <span class="tag is-info">{{ tag.name }}</span>
+                    {% endfor %}
+                </p>
+                <p>Publié le {{ book.publishedAt|date('d/m/Y') }} par {{ book.editor.name }}</p>
+                <p>ISBN : {{ book.isbn }}</p>
+            </section>
+            <section class="section">
+                <div class="content">
+                    {{ book.abstract|raw }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+{% endblock %}
+

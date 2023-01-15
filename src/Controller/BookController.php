@@ -140,6 +140,14 @@ class BookController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/books/view/{book}', name: 'book_view')]
+    public function view(Request $request, Book $book): Response
+    {
+        return $this->render('book/view.html.twig', [
+            'book' => $book,
+        ]);
+    }
+
     #[Route(path: '/books/delete/{book}', name: 'book_delete')]
     public function delete(Request $request, Book $book): Response
     {
