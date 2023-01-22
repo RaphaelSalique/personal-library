@@ -37,6 +37,7 @@ class BookRepository extends ServiceEntityRepository
     public function listAllBooksWithRelations(): array
     {
         return $this->createPreQuery()
+            ->orderBy('b.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
