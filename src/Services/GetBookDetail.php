@@ -100,7 +100,7 @@ class GetBookDetail
 
         $items = $results->getItems();
 
-        if (count($items) > 0) {
+        if (!empty($items)) {
             /** @var Google_Service_Books_Volume $item */
             $item = array_pop($items);
             $selfId  = $item->id;
