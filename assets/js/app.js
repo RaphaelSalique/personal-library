@@ -32,10 +32,12 @@ if (tableElement !== null) {
     const paginator = new Pagination(tableElement, nbBookDisplayed, pageInit)
     paginator.init()
 
-    searchfield.addEventListener('input', () => {
-        const searchValue = searchfield.value.toLowerCase();
-        paginator.init(searchValue)
-    })
+    if (searchfield) {
+        searchfield.addEventListener('input', () => {
+            const searchValue = searchfield.value.toLowerCase();
+            paginator.init(searchValue)
+        })
+    }
 
     tableElement.addEventListener('beforeSort', () => {
         paginator.demasqueTous()

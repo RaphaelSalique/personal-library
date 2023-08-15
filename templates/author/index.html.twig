@@ -4,16 +4,19 @@
 
 {% block body %}
 
-    <p>
-        <a class="button is-success" href="{{ path('author_new') }}">Créer un auteur</a>
+    <div class="columns">
+        <div class="column">
+            <a class="button is-success" href="{{ path('author_new') }}">Créer un auteur</a>
+        </div>
         {% if authors|length > 1 %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button is-info" href="{{ path('author_merge') }}">Fusionner des auteurs</a>
+            <div class="column">
+                <a class="button is-info" href="{{ path('author_merge') }}">Fusionner des auteurs</a>
+            </div>
         {% endif %}
-    </p>
-    <br>
+    </div>
     <div class="columns">
         <div class="column is-3-widescreen">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <table id="authors" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <caption>Liste des auteurs ({{ authors|length }})</caption>
                 <thead>
                 <tr>

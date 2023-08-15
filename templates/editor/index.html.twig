@@ -3,16 +3,19 @@
 {% block title %}Liste des éditeurs{% endblock %}
 
 {% block body %}
-    <p>
-        <a class="button is-success" href="{{ path('editor_new') }}">Créer un éditeur</a>
+    <div class="columns">
+        <div class="column">
+            <a class="button is-success" href="{{ path('editor_new') }}">Créer un éditeur</a>
+        </div>
         {% if editors|length > 1 %}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button is-info" href="{{ path('editor_merge') }}">Fusionner des éditeurs</a>
+            <div class="column">
+                <a class="button is-info" href="{{ path('editor_merge') }}">Fusionner des éditeurs</a>
+            </div>
         {% endif %}
-    </p>
-    <br>
+    </div>
     <div class="columns">
         <div class="column is-3-widescreen">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <table id="editors" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <caption>Liste des éditeurs ({{ editors|length }})</caption>
                 <thead>
                 <tr>
