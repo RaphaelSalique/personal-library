@@ -4,16 +4,14 @@
 namespace App\Command;
 
 use App\Services\GetBookDetail;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * Class BookDetailCommand
- */
+#[AsCommand(name: 'app:book-detail')]
 class BookDetailCommand extends Command
 {
     /**
@@ -30,11 +28,6 @@ class BookDetailCommand extends Command
         parent::__construct();
         $this->getBookDetail = $getBookDetail;
     }
-
-    /**
-     * @var string
-     */
-    protected static $defaultName = 'app:book-detail';
 
     /**
      * configuration

@@ -44,6 +44,12 @@ th[aria-sort]:not([data-sort-method="none"]):after {
     opacity: 0.4;
 }
 
+.table {
+    td, th {
+        vertical-align: middle;
+    }
+}
+
 // Styles table responsive
 
 @media
@@ -62,12 +68,19 @@ only screen and (max-width: 760px),
         left: -9999px;
     }
 
-    tr { border: 1px solid #ccc; }
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 1em;
+    }
 
     td {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
+    }
+
+    .table.is-narrow td {
+        padding: 0.5em 0.5em 0.25em;
     }
 
     td:before {
@@ -78,12 +91,22 @@ only screen and (max-width: 760px),
     /*
     Label the data
     */
-    td:nth-of-type(1):before { content: "Nom : "; }
-    td:nth-of-type(2):before { content: "Auteur(s) : "; }
-    td:nth-of-type(3):before { content: "Éditeur : "; }
-    td:nth-of-type(4):before { content: "Tag(s) : "; }
-    td:nth-of-type(5):before { content: "Parution : "; }
-    td:nth-of-type(6):before { content: "Actions : "; }
+    #books {
+        td:nth-of-type(1):before { content: "Nom : "; }
+        td:nth-of-type(2):before { content: "Auteur(s) : "; }
+        td:nth-of-type(3):before { content: "Éditeur : "; }
+        td:nth-of-type(4):before { content: "Tag(s) : "; }
+        td:nth-of-type(5):before { content: "Parution : "; }
+        td:nth-of-type(6):before { content: "Date d'ajout : "; }
+        td:nth-of-type(7):before { content: "Résumé : "; }
+    }
+    #authors {
+        td:nth-of-type(1):before { content: "Nom de famille : "; }
+        td:nth-of-type(2):before { content: "Prénom : "; }
+   }
+    #editors, #tags {
+        td:nth-of-type(1):before { content: "Désignation : "; }
+   }
 }
 
 // Style form select multiple
@@ -99,4 +122,22 @@ only screen and (max-width: 760px),
 // Fix bug Bulma sur couleur lien button ?
 .button:visited {
     color: white !important;
+}
+
+// page view : suppression des marges de card
+@media
+only screen and (max-width: 760px) {
+    .card-content {
+        padding: 0;
+    }
+
+    .card .section {
+        padding: 14px;
+    }
+
+    .navbar-menu.is-active {
+        a, a:visited, a:focus {
+            color: #000;
+        }
+    }
 }

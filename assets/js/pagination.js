@@ -57,7 +57,9 @@ export default class Pagination {
                 this.total++
             }
         })
-        this.tableau.querySelector('#total').innerText = this.total
+        if (this.tableau.querySelector('#total')) {
+            this.tableau.querySelector('#total').innerText = this.total
+        }
         if (this.tfoot) {
             this.tableau.removeChild(this.tfoot)
             this.tfoot = null
