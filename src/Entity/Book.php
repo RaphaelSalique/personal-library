@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
-use Google\Service\ServiceControl\Auth;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -22,30 +21,30 @@ class Book
 
     #[ORM\ManyToOne(targetEntity: Editor::class, inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
-    private Editor $editor;
+    public Editor $editor;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $title;
+    public string $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $abstract;
+    public ?string $abstract;
 
     #[ORM\Column(type: 'datetime')]
-    private DateTimeInterface $createdAt;
+    public DateTimeInterface $createdAt;
 
     #[ORM\Column(type: 'datetime')]
-    private DateTimeInterface $publishedAt;
+    public DateTimeInterface $publishedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $isbn;
+    public string $isbn;
 
     /** @var Collection<Author> */
     #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
-    private Collection $authors;
+    public Collection $authors;
 
     /** @var Collection<Tag> */
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'books')]
-    private Collection $tags;
+    public Collection $tags;
 
     public function __construct()
     {
@@ -57,11 +56,6 @@ class Book
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEditor(): ?Editor
-    {
-        return $this->editor;
     }
 
     public function setEditor(Editor $editor): self
@@ -81,11 +75,6 @@ class Book
         $this->title = $title;
 
         return $this;
-    }
-
-    public function getAbstract(): ?string
-    {
-        return $this->abstract;
     }
 
     public function setAbstract(?string $abstract): self
@@ -119,21 +108,11 @@ class Book
         return $this;
     }
 
-    public function getIsbn(): ?string
-    {
-        return $this->isbn;
-    }
-
     public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
 
         return $this;
-    }
-
-    public function getAuthors(): Collection
-    {
-        return $this->authors;
     }
 
     public function addAuthor(Author $author): self

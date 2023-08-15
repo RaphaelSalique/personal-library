@@ -27,7 +27,7 @@ class Kernel extends BaseKernel
      */
     public function registerBundles(): iterable
     {
-        $contents = require $this->getProjectDir() . '/config/bundles.php';
+        $contents = require $this->getProjectDir() . '/config/bundles.php'; // NOSONAR
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
                 yield new $class();
@@ -75,7 +75,7 @@ class Kernel extends BaseKernel
         if (is_file(\dirname(__DIR__) . '/config/routes.yaml')) {
             $routes->import('../config/routes.yaml');
         } elseif (is_file($path = \dirname(__DIR__) . '/config/routes.php')) {
-            (require $path)($routes->withPath($path), $this);
+            (require $path)($routes->withPath($path), $this); // NOSONAR
         }
     }
 }
