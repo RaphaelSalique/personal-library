@@ -56,12 +56,10 @@ import 'choices.js/src/styles/choices.scss'
 import Choices from 'choices.js'
 
 const selectMultiples = document.querySelectorAll('[multiple="multiple"]')
-selectMultiples.forEach((element) => {
-    let choices = new Choices(element, {
-        shouldSort: true,
-        removeItemButton: true
-    })
-})
+selectMultiples.forEach((element) => new Choices(element, {
+    shouldSort: true,
+    removeItemButton: true
+}))
 
 // Messages flash
 document.addEventListener('DOMContentLoaded', () => {
