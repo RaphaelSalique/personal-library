@@ -1,6 +1,5 @@
 .idea/
 .mage.yml
-sonar-project.properties
 mysql
 ###> symfony/framework-bundle ###
 /.env.local
