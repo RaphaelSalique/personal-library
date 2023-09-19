@@ -1,0 +1,2 @@
+sonar.projectKey=clef_sonar
+sonar.qualitygate.wait=true
