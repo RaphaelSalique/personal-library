@@ -1,0 +1,24 @@
+magephp:
+    environments:
+        production:
+            user: myuser
+            branch: mybranch
+            from: relative_path
+            ssh:
+                port: exotic_port
+            host_path: absolute_path
+            releases: 4
+            exclude:
+                - ./var/cache/*
+                - ./var/log/*
+                - ./web/app_dev.php
+            hosts:
+                - relative_to_ssh_hosts
+            pre-deploy:
+                - git/update
+                - composer/install
+                - composer/dump-autoload
+            on-deploy:
+            on-release:
+            post-release:
+            post-deploy:
